@@ -13,9 +13,9 @@ const Sidebar = ({ logout }) => (
     <div>
       <div>
         <div className="p-4">
-          <h2 className="px-4 rounded-lg bg-neutral-500" onClick={logout}>
-            logout
-          </h2>
+          <button className="px-4 py-4 rounded-[50%]  bg-emerald-600" onClick={logout}>
+            👈
+          </button>
         </div>
       </div>
     </div>
