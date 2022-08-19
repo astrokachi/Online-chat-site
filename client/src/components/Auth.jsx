@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const initialState = {
-  name: '',
+  username: '',
   password: '',
   confirm: '',
   email: '',
@@ -18,7 +18,7 @@ export const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [isMatch, setIsMatch] = useState(true);
-
+  const [error, setError] = useState('');
 
   const confirmPassword = (e) => {
     e.preventDefault();
@@ -35,30 +35,39 @@ export const Auth = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const { name, password, email } = form;
+      const { username, password, email } = form;
 
-    const URL = 'http://localhost:5000/auth';
+      const URL = 'http://localhost:5000/auth';
 
-    const {
-      data: { token, userId, hashedPassword },
-    } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-      name,
-      password,
-      email,
-    });
+      const {
+        data: { token, userId, hashedPassword },
+      } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+        username,
+        password,
+        email,
+      });
 
-    cookies.set('token', token);
-    cookies.set('name', name);
-    cookies.set('userId', userId);
-    cookies.set('email', email);
+      cookies.set('token', token);
+      cookies.set('userId', userId);
+      cookies.set('email', email);
 
-    if (isSignup) {
-      cookies.set('hashedPassword', hashedPassword);
+      if (isSignup) {
+        cookies.set('username', username);
+        cookies.set('hashedPassword', hashedPassword);
+      }
+
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      if (error.code === 'ERR_BAD_RESPONSE') {
+        setError('Password incorrect');
+      } else if (error.code === 'ERR_BAD_REQUEST') {
+        setError('user not found');
+      }
     }
-
-    window.location.reload();
   };
 
   return (
@@ -75,18 +84,24 @@ export const Auth = () => {
               </p>
 
               {/* <Input title='name' placeholder='John'  /> */}
-              <form
-                onSubmit={(e) => {
-                  confirmPassword(e);
-                }}
-                onChange={(e) => handleChange(e)}
-                className=""
-              >
+              <form onChange={(e) => handleChange(e)} className="">
                 <div className="w-[68%]">
-                  <Input title="email" placeholder="John" name="email" handleChange={handleChange} />
-                  <Input title="password" placeholder="password" name="password" handleChange={handleChange} />
+                  <Input title="email" placeholder="example@email.com" name="email" handleChange={handleChange} />
+                  <Input
+                    title="password"
+                    type="password"
+                    placeholder="password"
+                    name="password"
+                    handleChange={handleChange}
+                  />
+                  {error && <p className="text-red-300 text-xs">{error}</p>}
                 </div>
-                <button className="outline-none border-none bg-purp w-full py-2 text-white rounded-[10px] mt-24">
+                <button
+                  onClick={(e) => {
+                    handleSubmit(e);
+                  }}
+                  className="outline-none border-none bg-purp w-full py-2 text-white rounded-[10px] mt-24"
+                >
                   Log in
                 </button>
               </form>
@@ -115,17 +130,30 @@ export const Auth = () => {
               >
                 <div className="">
                   <div className="flex justify-between w-full gap-[15%]">
-                    <Input title="username" placeholder="John" name={'name'} handleChange={handleChange} share />
+                    <Input title="username" placeholder="John" name={'username'} handleChange={handleChange} share />
                     <Input
                       title="email"
                       placeholder="example@email.com"
                       name={'email'}
                       handleChange={handleChange}
+                      type="email"
                       share
                     />
                   </div>
-                  <Input title="password" placeholder="password" name={'password'} handleChange={handleChange} />
-                  <Input title="confirm password" placeholder="password" name={'confirm'} handleChange={handleChange} />
+                  <Input
+                    title="password"
+                    type="password"
+                    placeholder="password"
+                    name={'password'}
+                    handleChange={handleChange}
+                  />
+                  <Input
+                    title="confirm password"
+                    type="password"
+                    placeholder="password"
+                    name={'confirm'}
+                    handleChange={handleChange}
+                  />
                   {!isMatch && <p className="text-xs">Passwords don't match</p>}
                 </div>
                 <button className="outline-none border-none bg-purp w-full py-2 text-white rounded-[10px] mt-10">
