@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const initialState = {
-  username: '',
+  name: '',
   password: '',
   confirm: '',
   email: '',
@@ -38,14 +38,14 @@ export const Auth = () => {
     try {
       e.preventDefault();
 
-      const { username, password, email } = form;
+      const { name, password, email } = form;
 
       const URL = 'http://localhost:5000/auth';
 
       const {
         data: { token, userId, hashedPassword },
       } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-        username,
+        name,
         password,
         email,
       });
@@ -55,7 +55,7 @@ export const Auth = () => {
       cookies.set('email', email);
 
       if (isSignup) {
-        cookies.set('username', username);
+        cookies.set('name', name);
         cookies.set('hashedPassword', hashedPassword);
       }
 
@@ -130,7 +130,7 @@ export const Auth = () => {
               >
                 <div className="">
                   <div className="flex justify-between w-full gap-[15%]">
-                    <Input title="username" placeholder="John" name={'username'} handleChange={handleChange} share />
+                    <Input title="username" placeholder="John" name={'name'} handleChange={handleChange} share />
                     <Input
                       title="email"
                       placeholder="example@email.com"
