@@ -12,7 +12,7 @@ const app_id = process.env.STREAM_APP_ID
 
 const signup = async (req, res) => {
     try {
-        const { username, password, email } = req.body;
+        const { name, password, email } = req.body;
 
         const userId = crypto.randomBytes(16).toString('hex');
 
@@ -22,7 +22,7 @@ const signup = async (req, res) => {
 
         const token = serverClient.createUserToken(userId);
 
-        res.status(200).json({ token, username,  userId, hashedPassword, email });
+        res.status(200).json({ token, name,  userId, hashedPassword, email });
     } catch (error) {
         console.log(error);
 
@@ -49,7 +49,7 @@ const login = async (req, res) => {
         const token = serverClient.createUserToken(users[0].id);
 
         if(success) {
-            res.status(200).json({ token, email, userId: users[0].id, username: users[0].username});
+            res.status(200).json({ token, email, userId: users[0].id, name: users[0].name});
         } else {
             res.status(500).json({ message: 'Incorrect password' });
         }
