@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-export const ChatsPreview = ({ channel }) => {
+export const ChatsPreview = ({ setActiveChannel, channel, setToggleContainer, setIsCreating, setIsEditing }) => {
   const { channel: activeChannel, client } = useChatContext();
 
   const Preview = () => {
@@ -9,19 +9,26 @@ export const ChatsPreview = ({ channel }) => {
       ({ user }) => user.id !== client.userID
     );
     return (
-      <div>
+      <div className='flex gap-2 cursor-pointer hover:bg-slate-500 py-2'>
         <Avatar
           image={members[0]?.user?.image}
-          name={members[0]?.user?.fullName}
+          name={members[0]?.user?.name}
           size={24}
         />
-        <p>{members[0]?.user?.fullName}</p>
+        <p>{members[0]?.user?.name}</p>
       </div>
     );
   };
 
   return (
-    <div className={`${channel?.id === activeChannel?.id ? 'text-white' : ''}`} onClick={() => {console.log(channel)}}>
+    <div className={`${channel?.id === activeChannel?.id ? 'text-white' : ''}`} onClick={() => {
+      setIsCreating(false)
+      setIsEditing(false)
+      setActiveChannel(channel)
+      if(setToggleContainer){
+        setToggleContainer((prev) => !prev)
+      }
+      }}>
         <Preview />
     </div>
   )
