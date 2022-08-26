@@ -11,6 +11,9 @@ module.exports = {
         'start': '#1c1b6f',
         'end': '#1e1e1e',
         'purp': '#9747FF'
+      }, 
+      boxShadow: {
+        '3xl': '0px 0px 27px 1px rgba(255,255,255,0.2)',
       } 
     },
     fontFamily: {

@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
-import { Chatter }from './components/Chatter';
+import React, { useContext, useState } from 'react';
+import { Routes, Route } from "react-router-dom";
+// import { Chatter }from './components/Chatter';
 import { Auth } from './components/Auth';
 import Cookies from 'universal-cookie';
 import { StreamChat } from 'stream-chat';
 import 'stream-chat-react/dist/css/index.css'
-import './App.css'
+// import './App.css'
+import {  Initial } from './pages/Initial';
+import { Home } from './pages/Home';
+import { HomePage } from './pages/HomePage';
+import { Chat } from './pages/Chat';
+import AuthProvider, { AuthContext } from './context/auth';
+import { PrivateRoute } from './components/PrivateRoute';
 
-const cookies = new Cookies()
-
-const apiKey = process.env.REACT_APP_API_KEY;
-const authToken = cookies.get("token");
-
-const client = StreamChat.getInstance(apiKey);
 
 
-if(authToken) {
-    client.connectUser({
-        id: cookies.get('userId'),
-        name: cookies.get('name'),
-        hashedPassword: cookies.get('hashedPassword'),
-        email: cookies.get('email')
-    }, authToken)
-}
 
 function App() {
-  const [createType, setCreateType] = useState();
-  const [isCreating, setIsCreating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  // if(!authToken) return <Auth />
+  // const [ouser, setouser]
 
-
-  if(!authToken) return <Auth />
-
-  else return (
-    <div className="mx-auto w-full h-full">
-      <Chatter isCreating={isCreating} setIsCreating={setIsCreating} setIsEditing={setIsEditing} isEditing={isEditing} createType={createType} setCreateType={setCreateType} />
-    </div>
+   return (
+    <AuthProvider >
+    <Routes>
+      <Route path='/login' element={<Auth />} />
+      <Route path='/chat/:id' element={<Chat  />} />
+      <Route path='/' element={<PrivateRoute><Initial /></PrivateRoute> } />
+      <Route path='/landing' element={<Home />} />
+      <Route path='/home' element={<PrivateRoute><HomePage /></PrivateRoute>} />
+    </Routes>
+    </AuthProvider>
   );
 }
 

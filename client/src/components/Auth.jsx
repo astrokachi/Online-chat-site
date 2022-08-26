@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from './Input';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const cookies = new Cookies();
 
@@ -10,15 +15,19 @@ const initialState = {
   password: '',
   confirm: '',
   email: '',
+  error: null,
+  loading: false,
 };
-
-// adrianhajdin
 
 export const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [isMatch, setIsMatch] = useState(true);
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
+  // console.log(isSignup)
 
   const confirmPassword = (e) => {
     e.preventDefault();
@@ -26,54 +35,56 @@ export const Auth = () => {
     else setIsMatch(false);
 
     if (isMatch) {
-      handleSubmit(e);
+       handleSubmit(e);
     }
   };
-
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setForm({ ...form, error: null, loading: true });
     try {
-      e.preventDefault();
-
-      const { name, password, email } = form;
-
-      const URL = 'http://localhost:5000/auth';
-
-      const {
-        data: { token, userId, hashedPassword },
-      } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-        name,
-        password,
-        email,
+      const result = await createUserWithEmailAndPassword(auth, form.email, form.password);
+      // console.log(result.user);
+      await setDoc(doc(db, 'users', result.user.uid), {
+        uid: result.user.uid,
+        name: form.name,
+        email: form.email,
+        hhh: form.password,
+        createdAt: Timestamp.fromDate(new Date()),
+        isOnline: true,
       });
-
-      cookies.set('token', token);
-      cookies.set('userId', userId);
-      cookies.set('email', email);
-
-      if (isSignup) {
-        cookies.set('name', name);
-        cookies.set('hashedPassword', hashedPassword);
-      }
-
-      window.location.reload();
+      navigate('/');
+      setForm({ name: '', email: '', password: '', error: null, loading: false });
     } catch (error) {
+      setForm({ ...form, error: error.message, loading: false });
+      // console.log(error);
+    }
+  };
+
+  const handleSubmitLog = async (e) => {
+    e.preventDefault();
+    setForm({ ...form, error: null, loading: true });
+    try {
+      const result = await signInWithEmailAndPassword(auth, form.email, form.password);
+      await updateDoc(doc(db, 'users', result.user.uid), { isOnline: true });
+      console.log(result.user);
+      navigate('/home');
+      setForm({ name: '', email: '', password: '', error: null, loading: false });
+    } catch (error) {
+      setForm({ ...form, error: error.message, loading: false });
       console.log(error);
-      if (error.code === 'ERR_BAD_RESPONSE') {
-        setError('Password incorrect');
-      } else if (error.code === 'ERR_BAD_REQUEST') {
-        setError('user not found');
-      }
     }
   };
 
   return (
     <div className="h-full w-full">
-      <div className="grid grid-flow-col grid-cols-2 p-0 m-0 h-screen w-full overflow-hidden">
-        {/* {isSignup ?  */}
+      <div className="grid grid-flow-col md:grid-cols-2 p-0 m-0 h-screen w-full overflow-hidden">
         <div className="relative flex h-full w-full justify-center items-center ">
           <div className={`py-10 px-14 div1 w-full absolute ${!isSignup ? 'open z-10' : 'close -z-10'} `}>
             <div>
@@ -83,8 +94,7 @@ export const Auth = () => {
                 Log in with your details that you used during the sign up process
               </p>
 
-              {/* <Input title='name' placeholder='John'  /> */}
-              <form onChange={(e) => handleChange(e)} className="">
+              <form className="">
                 <div className="w-[68%]">
                   <Input title="email" placeholder="example@email.com" name="email" handleChange={handleChange} />
                   <Input
@@ -94,16 +104,18 @@ export const Auth = () => {
                     name="password"
                     handleChange={handleChange}
                   />
-                  {error && <p className="text-red-300 text-xs">{error}</p>}
+                  {form.error && <p className="text-red-300 text-xs">{form.error.split(':')[1]}</p>}
                 </div>
+                {/* <Link to="/home"> */}
                 <button
                   onClick={(e) => {
-                    handleSubmit(e);
+                    handleSubmitLog(e);
                   }}
-                  className="outline-none border-none bg-purp w-full py-2 text-white rounded-[10px] mt-24"
+                  className="outline-none border-none  bg-purp w-full py-2 text-white rounded-[10px] mt-24"
                 >
                   Log in
                 </button>
+                {/* </Link> */}
               </form>
             </div>
 
@@ -130,7 +142,7 @@ export const Auth = () => {
               >
                 <div className="">
                   <div className="flex justify-between w-full gap-[15%]">
-                    <Input title="username" placeholder="John" name={'name'} handleChange={handleChange} share />
+                    <Input title="username" placeholder="John" name={'name'} share handleChange={handleChange} />
                     <Input
                       title="email"
                       placeholder="example@email.com"
@@ -156,9 +168,14 @@ export const Auth = () => {
                   />
                   {!isMatch && <p className="text-xs">Passwords don't match</p>}
                 </div>
-                <button className="outline-none border-none bg-purp w-full py-2 text-white rounded-[10px] mt-10">
+                {/* <Link to="/home"> */}
+                <button
+                  className="outline-none border-none text-white bg-purp w-full py-2  rounded-[10px] mt-10"
+                  disabled={form.loading}
+                >
                   Sign up
                 </button>
+                {/* </Link> */}
               </form>
             </div>
 
@@ -173,7 +190,7 @@ export const Auth = () => {
         </div>
 
         {/* } */}
-        <section className="bg-gradient-to-b h-screen via-end from-start to-end relative">
+        <section className="bg-gradient-to-b h-screen via-end from-start to-end relative hidden md:block">
           {/* <img src="" alt="" /> */}
         </section>
       </div>
