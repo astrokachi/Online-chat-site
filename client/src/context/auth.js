@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState } from "react";
-import {onAuthStateChanged} from 'firebase/auth'
+import {onAuthStateChanged, updateProfile} from 'firebase/auth'
 import { auth } from "../firebase";
 import { db} from '../firebase';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
 
 
 
+
     useEffect(() => {
         onAuthStateChanged(auth, user => {
           setUser(user)
@@ -20,6 +21,7 @@ const AuthProvider = ({ children }) => {
         })
       }, []);
   
+      // console.log("current", auth.currentUser)
      
   useEffect(() => {
     if(user){
@@ -28,7 +30,7 @@ const AuthProvider = ({ children }) => {
         const unsub = onSnapshot(q, (querysnapshot) => {
           let users = [];
           querysnapshot.forEach((doc) => {
-            users.push(doc.data());
+           users.push(doc.data());
           });
           setUsers(users);
         });
