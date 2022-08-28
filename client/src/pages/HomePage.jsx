@@ -11,8 +11,8 @@ import { AuthContext } from '../context/auth';
 export const HomePage = () => {
   const { user, users } = useContext(AuthContext);
 
-  // console.log(user);
-  console.log(users);
+  console.log(user);
+  // console.log(users);
 
   return (
     <div className="bg-gradient-to-b min-h-screen text-white from-start text-center to-black sm:px-6 md:px-14 py-4">
@@ -24,7 +24,9 @@ export const HomePage = () => {
 
       <div id="container" className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 px-3 pt-8 lg:gap-x-10 gap-y-8 ">
         {users.map((ouser) => {
-          return <Box key={user.uid} user={ouser} />;
+          console.log(ouser)
+          if(ouser.email.includes('-model')) return <Box key={ouser.uid} user={ouser} />;
+          else return ''
         })}
       </div>
     </div>

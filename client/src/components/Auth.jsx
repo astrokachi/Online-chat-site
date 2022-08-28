@@ -3,12 +3,12 @@ import { Input } from './Input';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../firebase';
 import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const cookies = new Cookies();
+
 
 const initialState = {
   name: '',
@@ -58,6 +58,18 @@ export const Auth = () => {
         hhh: form.password,
         createdAt: Timestamp.fromDate(new Date()),
         isOnline: true,
+      });
+      // const auth = getAuth();
+      updateProfile(auth.currentUser, {
+        displayName: form.name
+      }).then(() => {
+        // Profile updated!
+        console.log('done')
+        // ...
+      }).catch((error) => {
+        // An error occurred
+        console.log(error)
+        // ...
       });
       navigate('/');
       setForm({ name: '', email: '', password: '', error: null, loading: false });

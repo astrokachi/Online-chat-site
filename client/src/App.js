@@ -12,6 +12,8 @@ import { HomePage } from './pages/HomePage';
 import { Chat } from './pages/Chat';
 import AuthProvider, { AuthContext } from './context/auth';
 import { PrivateRoute } from './components/PrivateRoute';
+import Chats from './component/Chats';
+import { Profile } from './component/Profile';
 
 
 
@@ -28,6 +30,8 @@ function App() {
       <Route path='/' element={<PrivateRoute><Initial /></PrivateRoute> } />
       <Route path='/landing' element={<Home />} />
       <Route path='/home' element={<PrivateRoute><HomePage /></PrivateRoute>} />
+      <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
+      <Route path='/chats' element={<PrivateRoute><Profile /></PrivateRoute>} />
     </Routes>
     </AuthProvider>
   );

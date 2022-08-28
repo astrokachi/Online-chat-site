@@ -68,9 +68,14 @@ export const Nav = () => {
               
             </ul> */}
             <div className="py-1 md:block hidden">
+             <Link to={'/chats'}><p className='text-sm  hover:bg-purp cursor-pointer py-2'>Chats</p></Link> 
+             <Link to={'/profile'}>
+              <p className='text-sm  hover:bg-purp cursor-pointer py-2'>Profile</p>
+              </Link> 
               <p
+
                 onClick={logout}
-                className="block py-2 px-4 text-sm  text-gray-200 hover:bg-purp cursor-pointer"
+                className="block py-2 px-4 text-sm border-t divide-gray-100 w-44  text-gray-200 hover:bg-purp cursor-pointer"
               >
                 Sign out
               </p>
@@ -100,7 +105,7 @@ export const Nav = () => {
         aria-modal="true"
         role="dialog"
       >
-        <h5 id="drawer-label" className="inline-flex items-center mb-4 text-base font-semibold text-gray-400"></h5>
+        <h5 id="drawer-label" className="inline-flex items-center mb-4 text-base font-semibold text-gray-400">aa</h5>
         <button
           type="button"
           data-drawer-dismiss="drawer-example"
