@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Upload } from '../assets/Upload.jsx';
 import { db, auth } from '../firebase.js';
-import { addDoc, collection, query, where, onSnapshot, Timestamp, orderBy } from 'firebase/firestore';
+import { addDoc, collection, query, setDoc, doc, onSnapshot, Timestamp, orderBy, getDoc, updateDoc } from 'firebase/firestore';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.js';
 import { useState } from 'react';
@@ -10,13 +10,16 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const MessageForm = ({ otherUser, setMsgs }) => {
   const [text, setText] = useState();
-  const { user } = useContext(AuthContext);
+  const { user, last, setLast } = useContext(AuthContext);
   const [img, setImg] = useState();
 
-  console.log(user, otherUser)
+  // console.log(user, otherUser)
+
+
+
 
     useEffect(() => {
-      const handleClick = () => {
+      const handleClick = async() => {
         const id = user?.uid > otherUser?.uid ? `${user?.uid} + ${otherUser?.uid}` : `${otherUser?.uid} + ${user?.uid}`;
         const msgRef = collection(db, 'messages', id, 'chat');
         const q = query(msgRef, orderBy('createdAt', 'asc'));
@@ -26,25 +29,17 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
             msgs.push(doc.data());
           });
           setMsgs(msgs);
-        //   console.log(msgs)
+          //   console.log(msgs)
         });
+        const docSnap = await getDoc(doc(db, 'lastMsg', id))
+        if(docSnap.data() && docSnap.data().from !== user.uid){
+          await updateDoc(doc(db, 'lastMsg', id), {unread: false})
+        }
       };
       handleClick();
     }, [otherUser?.uid, user?.uid]);
 
-//   if (user && otherUser) {
-//     const id = user.uid > otherUser.uid ? `${user.uid} + ${otherUser.uid}` : `${otherUser.uid} + ${user.uid}`;
-//     const msgRef = collection(db, 'messages', id, 'chat');
-//     const q = query(msgRef, orderBy('createdAt', 'asc'));
-//     onSnapshot(q, (querySnapShot) => {
-//       let msgs = [];
-//       querySnapShot.forEach((doc) => {
-//         msgs.push(doc.data());
-//       });
-//       setMsgs(msgs);
-//       console.log(msgs);
-//     });
-//   }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,22 +53,31 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
         const snap = await uploadBytes(imgRef, img);
         const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
         url = dlUrl;
-        console.log(url);
+        // console.log(url);
       }
         await addDoc(collection(db, 'messages', id, 'chat'), {
-          text,
+          text: text ? text : '',
           from: user.uid,
           to: otherUser.uid,
           createdAt: Timestamp.fromDate(new Date()),
           media: url || '',
         });
         setText('');
+
+        await setDoc(doc(db, 'lastMsg', id), {
+          text: text  ? text : '',
+          from: user.uid,
+          to: otherUser.uid,
+          createdAt: Timestamp.fromDate(new Date()),
+          media: url || '',
+          unread: true,
+        })
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <form className="flex items-center border bg-black  rounded-lg border-white m-2 p-3 justify-between gap-3 fixed bottom-0 w-[54%] md:w-[56%] lg:w-[57%]">
+    <form className="flex items-center border bg-black  rounded-lg border-white m-2 p-3 justify-between gap-3 fixed bottom-0 w-[94%] md:w-[56%] lg:w-[57%]">
       <label htmlFor="img">
         <Upload />
       </label>
