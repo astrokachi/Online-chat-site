@@ -31,7 +31,7 @@ function App() {
       <Route path='/landing' element={<Home />} />
       <Route path='/home' element={<PrivateRoute><HomePage /></PrivateRoute>} />
       <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
-      <Route path='/chats' element={<PrivateRoute><Profile /></PrivateRoute>} />
+      <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
     </Routes>
     </AuthProvider>
   );
