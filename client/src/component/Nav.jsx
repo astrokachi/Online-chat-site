@@ -8,6 +8,7 @@ import { auth, db } from '../firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../context/auth';
+import userr from '../assets/User.svg'
 
 
 export const Nav = () => {
@@ -39,12 +40,13 @@ export const Nav = () => {
 
       {user ? (
         <>
-          <p
+          {/* <p
             className="text-xs px-3 cursor-pointer py-2 bg-purp rounded-[50%] md:block hidden"
             onClick={() => setIsToggle(!isToggle)}
           >
             {auth?.currentUser?.name?.split('')[0]}
-          </p>
+          </p> */}
+          <img src={userr} alt="user" className='h-8 cursor-pointer' onClick={() => setIsToggle(!isToggle)} />
 
           {/* <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown header <svg className="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button> */}
 
@@ -68,14 +70,14 @@ export const Nav = () => {
               
             </ul> */}
             <div className="py-1 md:block hidden">
-             <Link to={'/chats'}><p className='text-sm  hover:bg-purp cursor-pointer py-2'>Chats</p></Link> 
+             <Link to={'/chats'}><p className='text-sm hover:bg-opacity-40 hover:bg-purp cursor-pointer py-2'>Chats</p></Link> 
              <Link to={'/profile'}>
-              <p className='text-sm  hover:bg-purp cursor-pointer py-2'>Profile</p>
+              <p className='text-sm  hover:bg-purp hover:bg-opacity-40 cursor-pointer py-2'>Profile</p>
               </Link> 
               <p
 
                 onClick={logout}
-                className="block py-2 px-4 text-sm border-t divide-gray-100 w-44  text-gray-200 hover:bg-purp cursor-pointer"
+                className="block py-2 px-4 text-sm border-t divide-gray-100 w-44 hover:bg-opacity-40 text-gray-200 hover:bg-purp cursor-pointer"
               >
                 Sign out
               </p>
