@@ -7,6 +7,7 @@ import { AuthContext } from '../context/auth.js';
 import { useState } from 'react';
 import { storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import send from '../assets/Send.svg'
 
 export const MessageForm = ({ otherUser, setMsgs }) => {
   const [text, setText] = useState();
@@ -14,8 +15,6 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
   const [img, setImg] = useState();
 
   // console.log(user, otherUser)
-
-
 
 
     useEffect(() => {
@@ -95,7 +94,9 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
         />
       </div>
       <div>
-        <button onClick={(e) => handleSubmit(e)}>Send</button>
+        <button onClick={(e) => handleSubmit(e)}>
+          <img src={send} alt="send" />
+        </button>
       </div>
     </form>
   );
