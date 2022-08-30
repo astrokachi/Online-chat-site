@@ -13,6 +13,7 @@
     "react-moment": "^1.1.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.4",
     "sass": "^1.54.4",
     "stream-chat": "^6.8.0",
     "stream-chat-react": "^9.4.1",
