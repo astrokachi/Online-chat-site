@@ -4,8 +4,8 @@ import qr from '../assets/qr.svg';
 
 const Btc = ({ active, setActive }) => {
   return (
-    <div onClick={() => setActive('btc')} className="pb-4 bg-white transition-all duration-300 ease-linear">
-      <header className="flex p-4 py-6 items-center justify-between bg-purple-200 bg-opacity-100 border-2 border-purp">
+    <div onClick={() => setActive('btc')} className="pb-4 bg-white  transition-all duration-300 ease-linear">
+      <header className="flex p-4 py-6 items-center justify-between cursor-pointer bg-purple-200 bg-opacity-100 border-2 border-purp">
         <div className="text-black md:text-base text-sm">
           <h3>Bitcoin</h3>
           {/* <h3 className="text-gray-500">Transaction fees may apply</h3> */}
@@ -31,7 +31,7 @@ const Btc = ({ active, setActive }) => {
                 type="text"
                 id="name"
                 placeholder="John Doe"
-                className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                className="border border-gray-500 hover:border-black outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
               />
             </div>
           </form>

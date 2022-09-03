@@ -5,7 +5,7 @@ import card3 from '../assets/image3.svg';
 const Credit = ({ setActive, active }) => {
   return (
     <div onClick={() => setActive('credit')} className='pb-8 bg-white'>
-      <header className="flex p-4 py-6 items-center justify-between bg-purple-200 bg-opacity-100 border-2 border-purp">
+      <header className="flex p-4 py-6 items-center justify-between cursor-pointer bg-purple-200 bg-opacity-100 border-2 border-purp">
         <div className="text-black md:text-base text-sm"  >
           <h3 >Credit & Debit Cards</h3>
           <h3 className="text-gray-500">Transaction fees may apply</h3>
@@ -29,7 +29,7 @@ const Credit = ({ setActive, active }) => {
                 type="text"
                 id="name"
                 placeholder="John Doe"
-                className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                className="border border-gray-500 hover:border-black outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
               />
             </div>
             <div className="grid gap-2 mt-5 ">
@@ -40,7 +40,7 @@ const Credit = ({ setActive, active }) => {
                   type="text"
                   id="name"
                   placeholder="1234 1234 1234 1234"
-                  className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                  className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
                 />
               </div>
 
@@ -54,7 +54,7 @@ const Credit = ({ setActive, active }) => {
                   type="text"
                   id="name"
                   placeholder="MM/YY"
-                  className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                  className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
                 />
               </div>
 
@@ -66,7 +66,7 @@ const Credit = ({ setActive, active }) => {
                   type="text"
                   id="name"
                   placeholder="123"
-                  className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                  className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
                 />
               </div>
             </div>
@@ -78,7 +78,7 @@ const Credit = ({ setActive, active }) => {
                 type="text"
                 id="name"
                 placeholder="1000"
-                className="border border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                className="border border-gray-500 hover:border-black outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
               />
             </div>
 
