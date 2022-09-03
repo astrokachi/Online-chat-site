@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext  } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.svg';
 import Cookies from 'universal-cookie';
@@ -8,33 +8,45 @@ import { auth, db } from '../firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../context/auth';
-import userr from '../assets/User.svg'
-
+import userr from '../assets/User.svg';
 
 export const Nav = () => {
-  const {user}= useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [isToggle, setIsToggle] = useState(true);
+  const { isActive, setIsActive } = useContext(AuthContext);
 
   const logout = async () => {
     await updateDoc(doc(db, 'users', auth.currentUser.uid), { isOnline: false });
     await signOut(auth);
   };
 
+  // const set = () ={
+
+  // }
+
   return (
-    <nav className="flex justify w-[95%] mx-auto gap-10 items-center">
+    <nav className={`flex justify w-[100%] mx-auto gap-10 items-center px-4 md:px-0 `}>
       <header className="italiano text-3xl flex items-center gap-2 flex-1 ">
-        RSangels <img className="h-7" src={logo} alt="logo" />{' '}
+        RSangels
+        <Link to={'/home'}>
+          <img className="h-7" src={logo} alt="logo" />{' '}
+        </Link>
       </header>
 
       <div className="md:flex gap-12 text-sm hidden">
-        <Link to="/home">
-          <ol>Home</ol>
+        <Link to="/home" onClick={() => setIsActive('home')}>
+          <ol className={` hover:text-purple-400 ${isActive === 'home' && 'text-purp'}`}>Home</ol>
         </Link>
-        <Link to="/">
-          <ol>Contact</ol>
+        <Link to="/chats" onClick={() => setIsActive('chats')}>
+          <ol className={`hover:text-purple-400 ${isActive === 'chats' && 'text-purp'}`}>Chats</ol>
         </Link>
-        <Link to="/">
-          <ol>History</ol>
+        <Link to="/profile" onClick={() => setIsActive('profile')}>
+          <ol className={`hover:text-purple-400 ${isActive === 'profile' && 'text-purp'}`}>Profile</ol>
+        </Link>
+        <Link to="/login">
+          <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
+            Sign out
+          </h2>
         </Link>
       </div>
 
@@ -46,7 +58,7 @@ export const Nav = () => {
           >
             {auth?.currentUser?.name?.split('')[0]}
           </p> */}
-          <img src={userr} alt="user" className='h-8 cursor-pointer' onClick={() => setIsToggle(!isToggle)} />
+          {/* <img src={userr} alt="user" className='h-8 cursor-pointer hidden md:block' onClick={() => setIsToggle(!isToggle)} /> */}
 
           {/* <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown header <svg className="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button> */}
 
@@ -58,24 +70,16 @@ export const Nav = () => {
           >
             <div className="py-3 px-4 text-sm text-gray-900 dark:text-white hidden md:block">
               <div>{auth?.currentUser?.name}</div>
-              <p>Hi!!</p>
-              <div className="font-medium truncate">{auth?.currentUser?.email}</div>
+              <p>Hi {auth?.currentUser?.displayName}</p>
+              {/* <div className="font-medium truncate"></div> */}
             </div>
-            {/* <ul className="py-1 text-sm text-gray-200 " aria-labelledby="dropdownInformationButton">
-              <li>
-                <p className="block py-2 px-4 hover:bg-purp cursor-pointer">
-                  Profile
-                </p>
-              </li>
-              
-            </ul> */}
-            <div className="py-1 md:block hidden">
-             <Link to={'/chats'}><p className='text-sm hover:bg-opacity-40 hover:bg-purp cursor-pointer py-2'>Chats</p></Link> 
-             <Link to={'/profile'}>
-              <p className='text-sm  hover:bg-purp hover:bg-opacity-40 cursor-pointer py-2'>Profile</p>
-              </Link> 
-              <p
 
+            <div className="py-1 md:block hidden">
+              {/* <Link to={'/chats'}><p className='text-sm hover:bg-opacity-40 hover:bg-purp cursor-pointer py-2'>Chats</p></Link>  */}
+              <Link to={'/profile'}>
+                <p className="text-sm  hover:bg-purp hover:bg-opacity-40 cursor-pointer py-2">Profile</p>
+              </Link>
+              <p
                 onClick={logout}
                 className="block py-2 px-4 text-sm border-t divide-gray-100 w-44 hover:bg-opacity-40 text-gray-200 hover:bg-purp cursor-pointer"
               >
@@ -99,7 +103,7 @@ export const Nav = () => {
 
       <div
         id="drawer-example"
-        className={`fixed z-40 md:hidden h-screen p-4 overflow-y-auto bg-white w-80 dark:bg-gray-800 transition-all ease-in-out right-0 duration-200 ${
+        className={`fixed z-40 md:hidden h-screen p-4 overflow-y-auto  w-80 bg-start  transition-all ease-in-out right-0 duration-200 ${
           isToggle ? '-z-10 opacity-0 translate-x-80' : 'right-0 -translate-x-0'
         } top-0 `}
         tabindex="-1"
@@ -107,12 +111,14 @@ export const Nav = () => {
         aria-modal="true"
         role="dialog"
       >
-        <h5 id="drawer-label" className="inline-flex items-center mb-4 text-base font-semibold text-gray-400">aa</h5>
+        <h5 id="drawer-label" className="inline-flex items-center mb-4 text-base font-semibold text-gray-400">
+          Hi! {user.displayName}
+        </h5>
         <button
           type="button"
           data-drawer-dismiss="drawer-example"
           aria-controls="drawer-example"
-          className="text-gray-400 bg-transparent  rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center hover:bg-gray-600 hover:text-white"
+          className="text-gray-400 bg-transparent  rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center hover:bg-purp hover:text-white"
         >
           <svg
             aria-hidden="true"
@@ -130,6 +136,41 @@ export const Nav = () => {
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
+
+        <section className="grid py-12 gap-8 relative">
+          <Link to="/home" onClick={() => setIsActive('home')}>
+            <h2
+              className={`bg-purp py-2 rounded-lg hover:bg-opacity-60 cursor-pointer ${
+                isActive === 'home' ? 'bg-opacity-100' : 'bg-opacity-25'
+              }`}
+            >
+              Home
+            </h2>
+          </Link>
+          <Link to="/chats" onClick={() => setIsActive('chats')}>
+            <h2
+              className={`bg-purp py-2 rounded-lg  hover:bg-opacity-60 cursor-pointer ${
+                isActive === 'chats' ? 'bg-opacity-100' : 'bg-opacity-25'
+              }`}
+            >
+              Chats
+            </h2>
+          </Link>
+          <Link to="/profile" onClick={() => setIsActive('profile')}>
+            <h2
+              className={`bg-purp py-2 rounded-lg  hover:bg-opacity-60 cursor-pointer ${
+                isActive === 'profile' ? 'bg-opacity-100' : 'bg-opacity-25'
+              }`}
+            >
+              Profile
+            </h2>
+          </Link>
+
+          {/* <h2 className="bg-purp py-2 rounded-lg bg-opacity-25 hover:bg-opacity-100 cursor-pointer">About</h2> */}
+        </section>
+        <h2 className="absolute bottom-4 mx-auto w-[90%] bg-orange-400 bg-opacity-25 cursor-pointer hover:bg-red-600 hover:bg-opacity-60 py-2 rounded-lg ">
+          Sign Out
+        </h2>
       </div>
     </nav>
   );

@@ -29,7 +29,6 @@ export const User = ({ c, m }) => {
     return () => unsub();
   }, [c, m, user?.uid]);
 
-  console.log(m);
 
   return (
     <Link to={`/chat/${c ? c?.uid : m?.uid}`}>
@@ -55,7 +54,7 @@ export const User = ({ c, m }) => {
             )}
             {last && m && (
               <h1>
-                <i>{last?.from === m?.uid ? `${c?.name}:` : 'You:'}</i>
+                <i>{last?.from === m?.uid ? `${m?.name}:` : 'You:'}</i>
               </h1>
             )}
             {!last && <h2 className="text-sm">send a message to start chat</h2>}

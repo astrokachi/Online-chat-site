@@ -14,7 +14,10 @@ module.exports = {
       }, 
       boxShadow: {
         '3xl': '0px 0px 27px 1px rgba(255,255,255,0.2)',
-      } 
+      },
+      TransitionEvent: {
+        'btrans': 'transition-all ease duration-200 hover:scale-95'
+      }
     },
     fontFamily: {
       'sans':  ["'Inter, sans-serif'", ...defaultTheme.fontFamily.sans],

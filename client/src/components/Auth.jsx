@@ -21,7 +21,7 @@ const initialState = {
 
 export const Auth = () => {
   const [form, setForm] = useState(initialState);
-  const [isSignup, setIsSignup] = useState(false);
+  const [isSignup, setIsSignup] = useState(true);
   const [isMatch, setIsMatch] = useState(true);
   // const [error, setError] = useState('');
 
@@ -97,7 +97,7 @@ export const Auth = () => {
   return (
     <div className="h-full w-full">
       <div className="grid grid-flow-col md:grid-cols-2 p-0 m-0 h-screen w-full overflow-hidden">
-        <div className="relative flex h-full w-full justify-center items-center ">
+        <div className="relative flex h-full w-full justify-center items-center bg-white">
           <div className={`py-10 px-14 div1 w-full absolute ${!isSignup ? 'open z-10' : 'close -z-10'} `}>
             <div>
               <header className="italiano text-purp text-5xl mb-12">RSangels</header>
