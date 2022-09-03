@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+
 import { Box } from '../component/Box';
 import { Footer } from '../component/Footer';
 import { Nav } from '../component/Nav';
@@ -10,10 +10,9 @@ import { AuthContext } from '../context/Auth';
 // import { useEffect } from 'react';
 
 export const HomePage = () => {
-  const { user, users } = useContext(AuthContext);
+  const {  users } = useContext(AuthContext);
 
-  // console.log(user);
-  console.log(users);
+  
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Upload } from '../assets/Upload.jsx';
-import { db, auth } from '../Firebase.js';
+import { db } from '../Firebase.js';
 import {
   addDoc,
   collection,
@@ -22,7 +22,7 @@ import send from '../assets/Send.svg';
 
 export const MessageForm = ({ otherUser, setMsgs }) => {
   const [text, setText] = useState('');
-  const { user, last, setLast } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [img, setImg] = useState();
 
   // console.log(user, otherUser)

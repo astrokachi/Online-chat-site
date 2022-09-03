@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
+
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MessageForm } from '../component/MessageForm';
 import { AuthContext } from '../context/Auth';
-import { db, auth } from '../Firebase.js';
-import { addDoc, collection, query, where, onSnapshot, Timestamp, orderBy } from 'firebase/firestore';
+
 import Message from '../component/Message';
 import back from '../assets/back.svg'
 
@@ -13,7 +12,7 @@ export const Chat = () => {
   const { id } = useParams();
   const { users } = useContext(AuthContext);
   const [msgs, setMsgs] = useState([]);
-  const [number, setNumber] = useState(8);
+  const [number] = useState(8);
   const [image, setImage] = useState(false);
   const [imgNo, setImgNo] = useState(0);
   const otherUser = users.filter((user) => user.uid === id);

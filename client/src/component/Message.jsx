@@ -1,13 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
 import Moment from 'react-moment';
-import { Link, useNavigate } from 'react-router-dom';
+
 import { AuthContext } from '../context/Auth';
 
 const Message = ({ msg, otherUser }) => {
   const { user } = useContext(AuthContext);
   // console.log(msg.media);
-  const navigate = useNavigate();
   const imageFormat = ['.jpeg', '.jpg', '.jfif', '.png', '.svg', '.webp', '.tiff', '.gif'];
   const videoFormat = ['.mp4', '.mov', '.avi', '.webm', '.ogg', '.mkv', '.mp3', '.wav', '.flac'];
 
@@ -40,7 +39,7 @@ const Message = ({ msg, otherUser }) => {
           ) : null}
           <p
             className={`bg-white  text-left px-9 text-sm py-1 rounded-full text-gray-700 w-max pb-1 ${
-              msg.text == '' && 'hidden'
+              msg.text === '' && 'hidden'
             }`}
           >
             {msg.text}
@@ -72,7 +71,7 @@ const Message = ({ msg, otherUser }) => {
           ) : null}
           <p
             className={`bg-purp text-right px-9 text-sm py-1 rounded-full ml-auto text-white w-max pb-1 ${
-              msg.text == '' && 'hidden'
+              msg.text === '' && 'hidden'
             }`}
           >
             {msg.text}

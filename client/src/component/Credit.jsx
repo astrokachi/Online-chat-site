@@ -18,7 +18,7 @@ const Credit = ({ setActive, active }) => {
         </div>
       </header>
 
-      {active == 'credit' && (
+      {active === 'credit' && (
         <div className="bg-white py-6 px-5 ">
           <form>
             <div className="grid gap-2">

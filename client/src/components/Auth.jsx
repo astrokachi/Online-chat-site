@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input } from './Input';
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import { Link, useNavigate } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../Firebase';
 import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
