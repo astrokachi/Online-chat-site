@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { AuthContext } from '../context/auth';
+import { AuthContext } from '../context/Auth';
 import back from '../assets/back.svg';
 import search from '../assets/search.svg';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { User } from './User';
 import { Nav } from './Nav';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase';
+import { auth, db } from '../Firebase';
 import { Footer } from './Footer';
 
 const Chats = () => {

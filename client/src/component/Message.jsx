@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import Moment from 'react-moment';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth';
+import { AuthContext } from '../context/Auth';
 
 const Message = ({ msg, otherUser }) => {
   const { user } = useContext(AuthContext);

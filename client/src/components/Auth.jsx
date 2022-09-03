@@ -4,9 +4,9 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from '../Firebase';
 import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../Firebase';
 
 
 

@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState } from "react";
 import {onAuthStateChanged, updateProfile} from 'firebase/auth'
-import { auth } from "../firebase";
-import { db} from '../firebase';
+import { auth } from "../Firebase";
+import { db} from '../Firebase';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import DotLoader from "react-spinners/DotLoader";
 

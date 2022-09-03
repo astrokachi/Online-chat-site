@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MessageForm } from '../component/MessageForm';
-import { AuthContext } from '../context/auth';
-import { db, auth } from '../firebase.js';
+import { AuthContext } from '../context/Auth';
+import { db, auth } from '../Firebase.js';
 import { addDoc, collection, query, where, onSnapshot, Timestamp, orderBy } from 'firebase/firestore';
 import Message from '../component/Message';
 import back from '../assets/back.svg'

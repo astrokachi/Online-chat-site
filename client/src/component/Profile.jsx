@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import photo from '../assets/photo.svg';
 import { Nav } from './Nav';
-import { auth, db, storage } from '../firebase';
+import { auth, db, storage } from '../Firebase';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { Footer } from './Footer';

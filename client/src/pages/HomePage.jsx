@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Box } from '../component/Box';
 import { Footer } from '../component/Footer';
 import { Nav } from '../component/Nav';
-import { AuthContext } from '../context/auth';
+import { AuthContext } from '../context/Auth';
 // import { db, auth } from '../firebase';
 // import { collection, query, where, onSnapshot } from 'firebase/firestore';
 // import { useEffect } from 'react';

@@ -10,7 +10,7 @@ import {  Initial } from './pages/Initial';
 import { Home } from './pages/Home';
 import { HomePage } from './pages/HomePage';
 import { Chat } from './pages/Chat';
-import AuthProvider, { AuthContext } from './context/auth';
+import AuthProvider, { AuthContext } from './context/Auth';
 import { PrivateRoute } from './components/PrivateRoute';
 import Chats from './component/Chats';
 import { Profile } from './component/Profile';

@@ -4,10 +4,10 @@ import logo from '../assets/Logo.svg';
 import Cookies from 'universal-cookie';
 import { StreamChat } from 'stream-chat';
 import hamburger from '../assets/hamburger.svg';
-import { auth, db } from '../firebase';
+import { auth, db } from '../Firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { AuthContext } from '../context/auth';
+import { AuthContext } from '../context/Auth';
 import userr from '../assets/User.svg';
 
 export const Nav = () => {

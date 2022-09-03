@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Upload } from '../assets/Upload.jsx';
-import { db, auth } from '../firebase.js';
+import { db, auth } from '../Firebase.js';
 import {
   addDoc,
   collection,
@@ -14,9 +14,9 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { useContext } from 'react';
-import { AuthContext } from '../context/auth.js';
+import { AuthContext } from '../context/Auth.js';
 import { useState } from 'react';
-import { storage } from '../firebase';
+import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import send from '../assets/Send.svg';
 
