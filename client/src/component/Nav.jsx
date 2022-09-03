@@ -43,61 +43,23 @@ export const Nav = () => {
         <Link to="/profile" onClick={() => setIsActive('profile')}>
           <ol className={`hover:text-purple-400 ${isActive === 'profile' && 'text-purp'}`}>Profile</ol>
         </Link>
-        <Link to="/login">
-          <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
-            Sign out
-          </h2>
-        </Link>
-      </div>
-
-      {user ? (
-        <>
-          {/* <p
-            className="text-xs px-3 cursor-pointer py-2 bg-purp rounded-[50%] md:block hidden"
-            onClick={() => setIsToggle(!isToggle)}
-          >
-            {auth?.currentUser?.name?.split('')[0]}
-          </p> */}
-          {/* <img src={userr} alt="user" className='h-8 cursor-pointer hidden md:block' onClick={() => setIsToggle(!isToggle)} /> */}
-
-          {/* <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown header <svg className="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button> */}
-
-          <div
-            id="dropdownInformation"
-            className={` w-44 bg-start  rounded divide-y divide-gray-100 shadow block absolute top-16 right-8 transition-all duration-200 ease-in ${
-              !isToggle ? 'z-10' : 'opacity-0 -z-10'
-            }`}
-          >
-            <div className="py-3 px-4 text-sm text-gray-900 dark:text-white hidden md:block">
-              <div>{auth?.currentUser?.name}</div>
-              <p>Hi {auth?.currentUser?.displayName}</p>
-              {/* <div className="font-medium truncate"></div> */}
-            </div>
-
-            <div className="py-1 md:block hidden">
-              {/* <Link to={'/chats'}><p className='text-sm hover:bg-opacity-40 hover:bg-purp cursor-pointer py-2'>Chats</p></Link>  */}
-              <Link to={'/profile'}>
-                <p className="text-sm  hover:bg-purp hover:bg-opacity-40 cursor-pointer py-2">Profile</p>
-              </Link>
-              <p
-                onClick={logout}
-                className="block py-2 px-4 text-sm border-t divide-gray-100 w-44 hover:bg-opacity-40 text-gray-200 hover:bg-purp cursor-pointer"
-              >
-                Sign out
-              </p>
-            </div>
+        {user ? (
+          <Link to="/login">
+            <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
+              Sign out
+            </h2>
+          </Link>
+        ) : (
+          <div className="gap-3 text-xs items-center flex ">
+            <Link to="/login">
+              <h2>Log in</h2>
+            </Link>
+            <Link to="/login">
+              <h2 className="bg-purp px-3 py-1 rounded-[20px]">Sign up</h2>
+            </Link>
           </div>
-        </>
-      ) : (
-        <div className="gap-3 text-xs items-center md:flex hidden">
-          <Link to="/login">
-            <h2>Log in</h2>
-          </Link>
-          <Link to="/login">
-            <h2 className="bg-purp px-3 py-1 rounded-[20px]">Sign up</h2>
-          </Link>
-        </div>
-      )}
+        )}
+      </div>
 
       <img src={hamburger} alt="ham" className="md:hidden cursor-pointer" onClick={() => setIsToggle(!isToggle)} />
 
@@ -112,7 +74,7 @@ export const Nav = () => {
         role="dialog"
       >
         <h5 id="drawer-label" className="inline-flex items-center mb-4 text-base font-semibold text-gray-400">
-          Hi! {user.displayName}
+          {/* Hi! {user.displayName} */}
         </h5>
         <button
           type="button"
@@ -168,9 +130,20 @@ export const Nav = () => {
 
           {/* <h2 className="bg-purp py-2 rounded-lg bg-opacity-25 hover:bg-opacity-100 cursor-pointer">About</h2> */}
         </section>
-        <h2 className="absolute bottom-4 mx-auto w-[90%] bg-orange-400 bg-opacity-25 cursor-pointer hover:bg-red-600 hover:bg-opacity-60 py-2 rounded-lg ">
-          Sign Out
-        </h2>
+        {user ? (
+          <h2 className="absolute bottom-4 mx-auto w-[90%] bg-orange-400 bg-opacity-25 cursor-pointer hover:bg-red-600 hover:bg-opacity-60 py-2 rounded-lg ">
+            Sign Out
+          </h2>
+        ) : (
+          <div className="flex absolute bottom-4 gap-4 w-[90%]">
+            <h2 className=" bottom-4 mx-auto w-[90%] bg-blue-400 bg-opacity-25 cursor-pointer hover:bg-purp hover:bg-opacity-60 py-2 rounded-lg ">
+              Log in
+            </h2>
+            <h2 className="bottom-4 mx-auto w-[90%] bg-blue-400 bg-opacity-25 cursor-pointer hover:bg-purp hover:bg-opacity-60 py-2 rounded-lg ">
+              Sign up
+            </h2>
+          </div>
+        )}
       </div>
     </nav>
   );

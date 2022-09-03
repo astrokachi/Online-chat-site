@@ -39,6 +39,18 @@ const AuthProvider = ({ children }) => {
         });
         return () => unsub();
     }
+    if(!user){
+      const usersRef = collection(db, 'users');
+        const q = query(usersRef);
+        const unsub = onSnapshot(q, (querysnapshot) => {
+          let users = [];
+          querysnapshot.forEach((doc) => {
+           users.push(doc.data());
+          });
+          setUsers(users);
+        });
+        return () => unsub();
+    }
   }, [user]);
 
 
