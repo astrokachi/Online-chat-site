@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { db } from '../Firebase';
 

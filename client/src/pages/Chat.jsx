@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MessageForm } from '../component/MessageForm';
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 
 import Message from '../component/Message';
 import back from '../assets/back.svg'

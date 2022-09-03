@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 import { db, auth } from '../Firebase.js';
 import { addDoc, collection, query, where, onSnapshot, Timestamp, orderBy } from 'firebase/firestore';
 

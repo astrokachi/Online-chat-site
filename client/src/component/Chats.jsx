@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 import back from '../assets/back.svg';
 import search from '../assets/search.svg';
 import { Link } from 'react-router-dom';

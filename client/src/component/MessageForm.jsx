@@ -14,7 +14,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { useContext } from 'react';
-import { AuthContext } from '../context/Auth.js';
+import { AuthContext } from '../Auth.js';
 import { useState } from 'react';
 import { storage } from '../Firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';

@@ -6,7 +6,7 @@ import hamburger from '../assets/hamburger.svg';
 import { auth, db } from '../Firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 
 
 export const Nav = () => {

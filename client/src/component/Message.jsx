@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import Moment from 'react-moment';
 
-import { AuthContext } from '../context/Auth';
+import { AuthContext } from '../Auth';
 
 const Message = ({ msg, otherUser }) => {
   const { user } = useContext(AuthContext);

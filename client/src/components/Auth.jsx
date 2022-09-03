@@ -38,7 +38,7 @@ export const Auth = () => {
     }
   };
   useEffect(() => {
-    console.log(form);
+    // console.log(form);
   }, [form]);
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
