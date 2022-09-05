@@ -32,7 +32,7 @@ const Chats = () => {
       setHolder(users.filter((ouser) => ouser.email.includes('-model')));
     } else if (user?.email.includes('-model')) {
       setCommons(users.filter((ouser) => !ouser.email.includes('-model')));
-      setHolder(users.filter((ouser) => ouser.email.includes('-model')));
+      setHolder(users.filter((ouser) => !ouser.email.includes('-model')));
     }
   };
 
@@ -43,14 +43,14 @@ const Chats = () => {
       newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
       setModels(newM);
       return;
-    } else if (commons.length && value.length > 0) {
+    } else if (commons && value.length > 0) {
       let newC = [...holder];
       newC = newC.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
       setCommons(newC);
       return;
     }
 
-    sortUsers();
+    setModels(holder)
   };
 
   useEffect(() => {

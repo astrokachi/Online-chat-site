@@ -86,7 +86,7 @@ export const Nav = () => {
 
           <div
             id="drawer-example"
-            className={`fixed z-40 h-[90vh] overflow-y-hidden px-3 py-6 w-[240px] bg-start top-[68px] md:top-[72px] transition-all ease-in-out left-0 duration-200 ${
+            className={`fixed z-40 h-[100vh] md:h-[100vh] overflow-y-hidden px-3 py-6 w-[240px] bg-start top-[68px] md:top-[72px] transition-all ease-in-out left-0 duration-200 ${
               isToggle ? '-z-10 opacity-0 -translate-x-80' : 'right-0 -translate-x-0'
             } `}
             tabindex="-1"
@@ -94,7 +94,7 @@ export const Nav = () => {
             aria-modal="true"
             role="dialog"
           >
-            <main className='scrolls  overflow-y-scroll h-[78vh]'>
+            <main className="scrolls  overflow-y-scroll h-[72vh]">
               <section className="grid py-2 gap-2 relative transition-all ease-in duration-150 ">
                 <Link to="/home" onClick={() => setIsActive('home')}>
                   <div className="flex w-full items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
@@ -193,7 +193,7 @@ export const Nav = () => {
 
             {user ? (
               <h2
-                className="text-center fixed bottom-4 mx-auto w-[90%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm "
+                className="text-center fixed bottom-24 mx-auto w-[90%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm "
                 onClick={logout}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -206,7 +206,7 @@ export const Nav = () => {
                 <h2>Sign Out</h2>
               </h2>
             ) : (
-              <div className="flex w-[90%] justify-between fixed bottom-5">
+              <div className="flex w-[90%] justify-between fixed bottom-24">
                 <Link to="/login">
                   <h2 className="text-center  mx-auto w-[100%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">

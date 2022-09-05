@@ -98,7 +98,7 @@ export const Chat = () => {
         className=" text-white overflow-y-scroll text-center bg-gradient-to-b from-start  to-black"
         style={{ gridColumn: 'span 3' }}
       >
-        <header className="bg-purp bg-opacity-30 p-4 flex gap-4 fixed w-[97%] md:w-[59%] items-center">
+        <header className="bg-purp bg-opacity-30 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center">
           <Link to='/chats'><img src={back} alt="" className='h-6 w-6 cursor-pointer' /></Link>
           <div className="h-16 w-16 rounded-[50%] bg-gray-400">
             {otherUser[0]?.avatar && <img src={otherUser[0].avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
