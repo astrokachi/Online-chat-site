@@ -119,8 +119,8 @@ export const Profile = () => {
   // }, [imgs])
   return (
     <>
-      <div className="bg-gradient-to-b min-h-screen text-white md:px-14 sm:px-6 py-4 from-start text-center to-black">
         <Nav />
+      <div className="bg-gradient-to-b min-h-screen text-white md:px-14 sm:px-6 py-16 from-start text-center to-black">
         <main className="bg-purp bg-opacity-10 h-max w-[90%] mb-8 mt-12 p-4 pb-24 mx-auto">
           <section className="text-gray-400 text-sm pt-4">Edit your profile</section>
           <div className="flex justify-center mt-3 ">

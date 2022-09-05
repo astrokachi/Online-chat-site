@@ -12,7 +12,7 @@ export const Box = (user) => {
 
   return (
     <div
-      className=" w-[100%] h-[200px] md:h-64 lg:h-[250px]  rounded-[10px] hover:scale-105  md:mx-auto relative bg-gray-400  transition-all duration-[400ms] ease"
+      className=" w-[100%] h-[200px] md:h-64 lg:h-[250px] cursor-pointer rounded-[10px] hover:scale-105  md:mx-auto relative bg-gray-400  transition-all duration-[400ms] ease"
       onMouseEnter={() => setState(true)}
       onMouseLeave={() => {
         setState(false);

@@ -28,6 +28,10 @@ export const User = ({ c, m }) => {
     return () => unsub();
   }, [c, m, user?.uid]);
 
+  useEffect(() => {
+    // console.log(m)
+  }, [m])
+
   return (
     <Link to={`/chat/${c ? c?.uid : m?.uid}`}>
       <header className="bg p-4 flex gap-4 w-full hover:bg-purp hover:bg-opacity-10">

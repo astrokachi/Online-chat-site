@@ -14,6 +14,7 @@ import { PrivateRoute } from './components/PrivateRoute';
 import Chats from './component/Chats';
 import { Profile } from './component/Profile';
 import { Book } from './pages/Book';
+import { ProfileClient } from './component/ProfileClient';
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
       <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path='/book/:id' element={<PrivateRoute> <Book /> </PrivateRoute>} />
+      <Route path='/:id/profile' element={<PrivateRoute> <ProfileClient /> </PrivateRoute>} />
     </Routes>
     </AuthProvider>
       </div>

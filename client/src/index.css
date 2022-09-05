@@ -67,3 +67,15 @@
       flex-grow: 0;
       flex-shrink: 0;
   }
+
+
+  .scrolls::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrolls{
+  -ms-overflow-style: none;  
+  scrollbar-width: none;
+  }
+
+

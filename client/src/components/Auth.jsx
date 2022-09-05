@@ -178,6 +178,7 @@ export const Auth = () => {
                     handleChange={handleChange}
                   />
                   {!isMatch && <p className="text-xs">Passwords don't match</p>}
+                  {form.error && <p className="text-red-300 text-xs">{form.error.split(':')[1]}</p>}
                 </div>
                 {/* <Link to="/home"> */}
                 <button
