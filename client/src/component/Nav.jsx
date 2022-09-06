@@ -7,22 +7,52 @@ import { auth, db } from '../Firebase';
 import { updateDoc, doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../Auth';
+import { useEffect } from 'react';
+import { UserSearch } from './UserSearch';
 
 export const Nav = () => {
   const { user } = useContext(AuthContext);
-  const [isToggle, setIsToggle] = useState(true);
-  const { isActive, setIsActive } = useContext(AuthContext);
+  const { isToggle, setIsToggle } = useContext(AuthContext);
+  const [models, setModels] = useState();
+  const [holder, setHolder] = useState();
+  const [query, setQuery] = useState();
+
+  const { users } = useContext(AuthContext);
+
+  const doSearch = (value) => {
+    // console.log(value);
+    setQuery(value);
+    if (models && value.length > 0) {
+      let newM = [...holder];
+      newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
+      setModels(newM);
+      // console.log(models);
+    }
+
+    if (value.length < 1) {
+      setModels(holder);
+      // console.log(models);
+    }
+  };
+
+  useEffect(() => {
+    const sortUsers = () => {
+      if (!user?.email.includes('-model')) {
+        setModels(users.filter((ouser) => ouser.email.includes('-model')));
+        setHolder(users.filter((ouser) => ouser.email.includes('-model')));
+      }
+    };
+    sortUsers();
+  }, [user?.email, users]);
 
   const logout = async () => {
     await updateDoc(doc(db, 'users', auth.currentUser.uid), { isOnline: false });
     await signOut(auth);
   };
 
-  const searchFn = (value) => {};
-
   return (
     <div className="fixed z-50 w-[100%] transition-all ease-in duration-150 shadow-lg">
-      <nav className={`flex  w-full mx-auto gap-10 items-center  py-4 px-8 bg-[#3f10acf3] text-white`}>
+      <nav className={`flex  w-full mx-auto md:gap-10 items-center  py-4 px-8 bg-[#3f10acf3] text-white`}>
         <img src={hamburger} alt="ham" className="cursor-pointer" onClick={() => setIsToggle(!isToggle)} />
 
         <div className="flex w-full md:justify-between justify-center gap-5">
@@ -40,17 +70,18 @@ export const Nav = () => {
             >
               <img src={search} alt="search" className="w-5 h-5" />
               <input
+                defaultValue={query}
                 type="text"
                 className="bg-transparent outline-none border-none py-2 pl-3 text-white "
                 onInput={(e) => {
-                  searchFn(e.target.value);
+                  doSearch(e.target.value);
                 }}
               />
             </form>
           </section>
 
           <div className="md:flex gap-8 text-sm hidden items-center">
-            <Link to="/profile" onClick={() => setIsActive('profile')}>
+            <Link to="/profile">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -96,7 +127,7 @@ export const Nav = () => {
           >
             <main className="scrolls  overflow-y-scroll h-[72vh]">
               <section className="grid py-2 gap-2 relative transition-all ease-in duration-150 ">
-                <Link to="/home" onClick={() => setIsActive('home')}>
+                <Link to="/home" onClick={() => setIsToggle(true)}>
                   <div className="flex w-full items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">
                       <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
@@ -107,7 +138,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to="/chats" onClick={() => setIsActive('chats')}>
+                <Link to="/chats" onClick={() => setIsToggle(true)}>
                   <div className="flex w-full items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">
                       <path
@@ -120,7 +151,7 @@ export const Nav = () => {
                     <h2>Chats</h2>
                   </div>
                 </Link>
-                <Link to="/profile" onClick={() => setIsActive('profile')}>
+                <Link to="/profile" onClick={() => setIsToggle(true)}>
                   <div className="flex w-full items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">
                       <path
@@ -141,13 +172,13 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">BODY TYPE</h2>
                 </div>
 
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Skinny</h2>
                 </div>
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Curvy</h2>
                 </div>
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Fit</h2>
                 </div>
               </section>
@@ -157,16 +188,16 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">HAIR</h2>
                 </div>
 
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>brown</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Copper shimmer</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>blonde</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>black</h2>
                 </div>
               </section>
@@ -176,16 +207,16 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">POPULAR</h2>
                 </div>
 
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Small tits</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>Big Tits</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>blonde</h2>
                 </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
+                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
                   <h2>black</h2>
                 </div>
               </section>
@@ -242,15 +273,24 @@ export const Nav = () => {
           >
             <img src={search} alt="search" className="w-5 h-5" />
             <input
+              defaultValue={query}
               type="text"
               className="bg-transparent outline-none border-none py-2 pl-3 text-white "
               onInput={(e) => {
-                searchFn(e.target.value);
+                doSearch(e.target.value);
               }}
             />
           </form>
         </section>
       </div>
+
+      {query && query !== '' && models.length > 0 && (
+        <div className=" absolute p-2 md:w-[500px] w-full bg-[#101030] max-h-[300px] overflow-y-scroll scrolls md:left-[50%] md:translate-x-[-50%] ">
+          {models?.map((model) => (
+            <UserSearch model={model} key={model.uid} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

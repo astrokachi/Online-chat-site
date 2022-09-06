@@ -18,6 +18,8 @@ const Chats = () => {
   const [user, setUser] = useState();
   const { users } = useContext(AuthContext);
   const [holder, setHolder] = useState([]);
+  const { isToggle, setIsToggle } = useContext(AuthContext);
+
   useEffect(() => {
     getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
       if (docSnap.exists) {
@@ -26,41 +28,49 @@ const Chats = () => {
     });
   }, []);
 
-  const sortUsers = () => {
-    if (!user?.email.includes('-model')) {
-      setModels(users.filter((ouser) => ouser.email.includes('-model')));
-      setHolder(users.filter((ouser) => ouser.email.includes('-model')));
-    } else if (user?.email.includes('-model')) {
-      setCommons(users.filter((ouser) => !ouser.email.includes('-model')));
-      setHolder(users.filter((ouser) => !ouser.email.includes('-model')));
-    }
-  };
-
   const searchFn = (value) => {
     console.log(value);
     if (models && value.length > 0) {
       let newM = [...holder];
       newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
       setModels(newM);
-      return;
-    } else if (commons && value.length > 0) {
+    }
+    if (commons && value.length > 0) {
+      console.log('reached');
       let newC = [...holder];
       newC = newC.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
+      console.log(newC);
       setCommons(newC);
-      return;
     }
 
-    setModels(holder)
+    if (value.length < 1) {
+      setModels(holder);
+      setCommons(holder);
+    }
   };
 
+  console.log(isToggle);
+
   useEffect(() => {
+    const sortUsers = () => {
+      if (!user?.email.includes('-model')) {
+        setModels(users.filter((ouser) => ouser.email.includes('-model')));
+        setHolder(users.filter((ouser) => ouser.email.includes('-model')));
+      } else if (user?.email.includes('-model')) {
+        setCommons(users.filter((ouser) => !ouser.email.includes('-model')));
+        setHolder(users.filter((ouser) => !ouser.email.includes('-model')));
+      }
+    };
     sortUsers();
-  }, [users]);
+  }, [user?.email, users]);
 
   return (
-    <>
-        <Nav />
-      <div className="w-full bg-gradient-to-b min-h-screen text-white p-4 py-16 from-start text-center to-black transition-all ease duration-150">
+    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`}>
+      <Nav />
+      <div
+        onClick={() => setIsToggle(true)}
+        className={`w-full bg-gradient-to-b min-h-screen text-white p-4 py-32 md:py-16 from-start text-center to-black transition-all ease duration-150`}
+      >
         <div className="bg-purp bg-opacity-20 flex  flex-col  rounded mt-6 min-h-[85vh] relative w-full max-w-full">
           <header className=" text-white bg-purp rounded-lg bg-opacity-20 items-center p-4 flex gap-4 w-full ">
             <Link to="/home">
@@ -95,8 +105,6 @@ const Chats = () => {
           </section>
 
           <div className="pt-8">
-            {/* {models.map((m, index) => <User m={m} key={index} />)} */}
-
             {user?.email.includes('-model')
               ? commons.map((c, index) => <User c={c} key={index} />)
               : models.map((m, index) => <User m={m} key={index} />)}
@@ -104,7 +112,7 @@ const Chats = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from "react-router-dom";
 // import { Chatter }from './components/Chatter';
 import { Auth } from './components/Auth';
@@ -9,7 +9,7 @@ import {  Initial } from './pages/Initial';
 import { Home } from './pages/Home';
 import { HomePage } from './pages/HomePage';
 import { Chat } from './pages/Chat';
-import AuthProvider from './Auth';
+import AuthProvider, { AuthContext } from './Auth';
 import { PrivateRoute } from './components/PrivateRoute';
 import Chats from './component/Chats';
 import { Profile } from './component/Profile';
@@ -18,12 +18,12 @@ import { ProfileClient } from './component/ProfileClient';
 
 
 
-
 function App() {
+
  
    return (
     <div className='con bg-gradient-to-b from-start  to-black'>
-      <div className='app'>
+      <div className={`app `}>
 
     <AuthProvider >
     <Routes>

@@ -22,16 +22,10 @@ export const User = ({ c, m }) => {
     }
     let unsub = onSnapshot(doc(db, 'lastMsg', id), (doc) => {
       setLast(doc.data());
-      // console.log(doc.data());
-      // console.log(id)
     });
     return () => unsub();
   }, [c, m, user?.uid]);
-
-  useEffect(() => {
-    // console.log(m)
-  }, [m])
-
+  
   return (
     <Link to={`/chat/${c ? c?.uid : m?.uid}`}>
       <header className="bg p-4 flex gap-4 w-full hover:bg-purp hover:bg-opacity-10">

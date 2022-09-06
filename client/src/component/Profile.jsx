@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import photo from '../assets/photo.svg';
@@ -7,6 +7,7 @@ import { auth, db, storage } from '../Firebase';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { Footer } from './Footer';
+import { AuthContext } from '../Auth';
 
 export const Profile = () => {
   const [update, setUpdate] = useState(false);
@@ -19,6 +20,7 @@ export const Profile = () => {
   const [count, setCount] = useState(0);
   const [number, setNumber] = useState(8);
   const [edit, setEdit] = useState(false);
+  const { isToggle, setIsToggle } = useContext(AuthContext);
 
   useEffect(() => {
     getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
@@ -118,9 +120,9 @@ export const Profile = () => {
   //   console.log('after', imgs);
   // }, [imgs])
   return (
-    <>
+    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`}>
         <Nav />
-      <div className="bg-gradient-to-b min-h-screen text-white md:px-14 sm:px-6 py-16 from-start text-center to-black">
+      <div className="bg-gradient-to-b min-h-screen text-white md:px-14 sm:px-6 py-32 md:py-16 from-start text-center to-black transition-all duration-150 ease-in" onClick={() => setIsToggle(true)}>
         <main className="bg-purp bg-opacity-10 h-max w-[90%] mb-8 mt-12 p-4 pb-24 mx-auto">
           <section className="text-gray-400 text-sm pt-4">Edit your profile</section>
           <div className="flex justify-center mt-3 ">
@@ -292,6 +294,6 @@ export const Profile = () => {
         </main>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };

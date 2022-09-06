@@ -9,6 +9,7 @@ import Message from '../component/Message';
 import back from '../assets/back.svg'
 
 export const Chat = () => {
+
   const { id } = useParams();
   const { users } = useContext(AuthContext);
   const [msgs, setMsgs] = useState([]);
@@ -16,6 +17,7 @@ export const Chat = () => {
   const [image, setImage] = useState(false);
   const [imgNo, setImgNo] = useState(0);
   const otherUser = users.filter((user) => user.uid === id);
+  const {isToggle, setIsToggle} = useContext(AuthContext)
 
   const about = otherUser[0]?.about?.split('...')[0];
   const body = otherUser[0]?.about?.split('...')[1];
@@ -33,7 +35,7 @@ export const Chat = () => {
     
     <div className="grid md:grid-cols-5 h-screen overflow-hidden relative bg-gradient-to-b from-start  to-black">
       <div
-        className="flex-col items-center pt-14 overflow-y-scroll hidden md:flex border-r border-r-gray-400 bg-purp bg-opacity-20 text-white"
+        className="flex-col items-center pt-14 overflow-y-scroll scrolls hidden md:flex border-r border-r-gray-400 bg-purp bg-opacity-20 text-white"
         style={{ gridColumn: 'span 2' }}
       >
         <div className="h-24 w-24 min-h-max rounded-[50%] bg-gray-400 " style={{height: "96px;!important" , width:"96px"}}>
@@ -95,10 +97,10 @@ export const Chat = () => {
         </div>
       )}
       <div
-        className=" text-white overflow-y-scroll text-center bg-gradient-to-b from-start  to-black"
+        className=" text-white overflow-y-scroll h-[89vh] scrolls text-center bg-gradient-to-b from-start  to-black"
         style={{ gridColumn: 'span 3' }}
       >
-        <header className="bg-purp bg-opacity-30 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center">
+        <header className="bg-purp bg-opacity-100 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center">
           <Link to='/chats'><img src={back} alt="" className='h-6 w-6 cursor-pointer' /></Link>
           <div className="h-16 w-16 rounded-[50%] bg-gray-400">
             {otherUser[0]?.avatar && <img src={otherUser[0].avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
@@ -112,7 +114,7 @@ export const Chat = () => {
           </div>
         </header>
 
-        <div className="pt-32 px-3 pb-24">
+        <div className="pt-32 px-3 pb-24 ">
           {msgs.length ? (
             msgs.map((msg, i) => {
               return <Message key={i} msg={msg} otherUser={otherUser} />;

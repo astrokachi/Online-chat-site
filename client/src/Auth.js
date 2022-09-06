@@ -11,7 +11,8 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [users, setUsers] = useState([]);
-    const [isActive, setIsActive] = useState('home');
+    const [isToggle, setIsToggle] = useState(true);
+    
 
 
 
@@ -63,7 +64,7 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    return <AuthContext.Provider value={{user, users, isActive, setIsActive}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{user, users, isToggle, setIsToggle}}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider

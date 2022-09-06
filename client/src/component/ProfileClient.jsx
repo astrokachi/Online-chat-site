@@ -5,13 +5,14 @@ import photo from '../assets/photo.svg';
 import { Nav } from './Nav';
 import { Footer } from './Footer';
 import { AuthContext } from '../Auth';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 export const ProfileClient = () => {
   const [number] = useState(8);
   const [grow, setGrow] = useState(false);
   const [imgNo, setImgNo] = useState();
+  const { isToggle, setIsToggle } = useContext(AuthContext);
 
   const { users } = useContext(AuthContext);
   const { id } = useParams();
@@ -31,13 +32,13 @@ export const ProfileClient = () => {
   const arr = [body, interest, zodiac, hair, eye, height, age, inte, rules];
 
   return (
-    <>
+    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`}>
       <Nav />
       <div className={` `}>
         <div
-          className={`bg-gradient-to-b  relative text-white md:px-14 sm:px-6 py-16 from-start text-center to-black `}
+        onClick={() => setIsToggle(true)}
+          className={`bg-gradient-to-b  relative text-white md:px-14 sm:px-6 md:py-16 py-32 from-start text-center to-black `}
         >
-       
           <main className="bg-purp bg-opacity-10 h-max w-[90%] mb-8 mt-12 p-4 pb-24 mx-auto">
             <section className="text-gray-400 text-sm pt-4">{user?.name}'s profile</section>
             <div className="flex justify-center mt-3 ">
@@ -47,20 +48,37 @@ export const ProfileClient = () => {
                 </div>
 
                 <h3 className="text-sm  pt-4">{user?.name}</h3>
+
+                <div className="flex text-sm gap-6">
+                  <Link to={`/chat/${user?.uid}`}>
+                    <button className="px-5 py-2 bg-purp rounded mt-3 text-white transition-all ease duration-200 hover:scale-95">
+                      Chat
+                    </button>
+                  </Link>
+                  <Link to={`/book/${user?.uid}`}> 
+                    <button className="px-5 py-2 bg-purp rounded mt-3 text-white transition-all ease duration-200 hover:scale-95">
+                      Book
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
 
             <div className="w-full border-b mb-9 border-b-purp border-opacity-25 "></div>
 
             <div className="">
-              <div className="grid grid-cols-5 justify-center mb-4 gap-[2%] text-sm ">
-                <p className="text-right">Name: </p>
-                <h2 className="text-left" style={{ gridColumn: 'span 3' }}>
+              <div className="grid grid-cols-6 justify-center mb-4 gap-[2%] text-sm nnnn">
+                <p className="text-right" style={{ gridColumn: 'span 2' }}>
+                  Name:{' '}
+                </p>
+                <h2 className="text-left " style={{ gridColumn: 'span 3' }}>
                   {user?.name}
                 </h2>
               </div>
-              <div className="grid grid-cols-5 justify-center mb-4 gap-[2%] text-sm ">
-                <p className="text-right">About: </p>
+              <div className="grid grid-cols-6 justify-center mb-4 gap-[2%] text-sm nnnn">
+                <p className="text-right" style={{ gridColumn: 'span 2' }}>
+                  About:{' '}
+                </p>
                 <h2 className="text-left" style={{ gridColumn: 'span 3' }}>
                   {user?.about?.split('...')[0] || 'null'}
                 </h2>
@@ -68,12 +86,18 @@ export const ProfileClient = () => {
 
               {arr.map((item) => {
                 return (
-                  <div className="grid grid-cols-5 justify-center mb-4 gap-[2%] text-sm " key={item}>
-                    <p className="text-right">{item?.split(':')[0]}: </p>
-                    <h2 className="text-left" style={{ gridColumn: 'span 3' }}>
-                      {item?.split(':')[1]}
-                    </h2>
-                  </div>
+                  <>
+                    {item && (
+                      <div className="grid grid-cols-6 justify-center mb-4 gap-[2%] text-sm nnnn" key={item}>
+                        <p className="text-right" style={{ gridColumn: 'span 2' }}>
+                          {item?.split(':')[0]}:{' '}
+                        </p>
+                        <h2 className="text-left" style={{ gridColumn: 'span 3' }}>
+                          {item?.split(':')[1]}
+                        </h2>
+                      </div>
+                    )}
+                  </>
                 );
               })}
             </div>
@@ -122,6 +146,6 @@ export const ProfileClient = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };
