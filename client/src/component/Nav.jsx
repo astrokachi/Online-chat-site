@@ -172,15 +172,32 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">BODY TYPE</h2>
                 </div>
 
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Skinny</h2>
-                </div>
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Curvy</h2>
-                </div>
-                <div className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Fit</h2>
-                </div>
+                <Link to="/models/skinny">
+                  <div
+                    className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Skinny</h2>
+                  </div>
+                </Link>
+
+                <Link to="/models/curvy">
+                  <div
+                    className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Curvy</h2>
+                  </div>
+                </Link>
+
+                <Link to="/models/fit">
+                  <div
+                    className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Fit</h2>
+                  </div>
+                </Link>
               </section>
 
               <section className="mt-6 mb-2">
@@ -188,18 +205,40 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">HAIR</h2>
                 </div>
 
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>brown</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Copper shimmer</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>blonde</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>black</h2>
-                </div>
+                <Link to={'/models/brown'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>brown</h2>
+                  </div>
+                </Link>
+
+                <Link to={'models/copper shimmer'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Copper shimmer</h2>
+                  </div>
+                </Link>
+
+                <Link to={'/models/blonde'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>blonde</h2>
+                  </div>
+                </Link>
+                <Link to={'/models/black'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>black</h2>
+                  </div>
+                </Link>
               </section>
 
               <section className="mt-6 mb-2">
@@ -207,18 +246,65 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">POPULAR</h2>
                 </div>
 
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Small tits</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>Big Tits</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>blonde</h2>
-                </div>
-                <div className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm" onClick={() => setIsToggle(true)}>
-                  <h2>black</h2>
-                </div>
+                <Link to="/models/small tits">
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Small tits</h2>
+                  </div>
+                </Link>
+
+                <Link to={'/models/big tits'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Big Tits</h2>
+                  </div>
+                </Link>
+
+                <Link to={'/models/blonde'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Unshaven</h2>
+                  </div>
+                </Link>
+
+                <Link to={'/models/shaven'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Shaven</h2>
+                  </div>
+                </Link>
+                <Link to={'/models/squirt'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Squirt</h2>
+                  </div>
+                </Link>
+                <Link to={'/models/big ass'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Big ass</h2>
+                  </div>
+                </Link>
+                <Link to={'/models/cute ass'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>Cute ass</h2>
+                  </div>
+                </Link>
               </section>
             </main>
 

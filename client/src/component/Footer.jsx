@@ -20,13 +20,18 @@ export const Footer = () => {
           </Link>
 
           <p className="text-sm">
-            RSangels is an entertainment community. You can watch chat with beautiful models, depending on your personal
-            taste and kinks. Express your wildest desires with the model of your dreams.
+            RSangels is an 18+ adult Hookup and entertainment community. You can chat with our professional models for
+            absolutely free. Browse through galleries of open minded females, you can select what desire you want to
+            explore from the menu, arrange private meetings.
+          </p>
+          <br />
+          <p className="text-sm">
+            The purpose of that to create an ultimate destination for adult entertainment filled with good vibes and
+            happy aftertaste. Our models carry on them GPS for easy access of location and for security reasons.
           </p>
           <br />
           <p className="text-sm mb-12">
-            Besides chatting with these models, you can also book escort meetings at a set time and date for an agreed
-            price, Prices may vary depending on your location and kinks.
+            All models appearing on this site have contractually confirmed to us that they are 18 years of age or older.
           </p>
           <br />
         </div>

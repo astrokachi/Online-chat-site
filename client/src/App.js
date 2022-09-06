@@ -32,6 +32,7 @@ function App() {
       <Route path='/' element={<Initial /> } />
       <Route path='/landing' element={<Home />} />
       <Route path='/home' element={<HomePage />} />
+      <Route path='/models/:pref' element={<HomePage />} />
       <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
       <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path='/book/:id' element={<PrivateRoute> <Book /> </PrivateRoute>} />
