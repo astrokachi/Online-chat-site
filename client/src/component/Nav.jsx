@@ -210,11 +210,11 @@ export const Nav = () => {
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
                   >
-                    <h2>brown</h2>
+                    <h2>Brown</h2>
                   </div>
                 </Link>
 
-                <Link to={'models/copper shimmer'}>
+                <Link to={'/models/copper shimmer'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -228,7 +228,7 @@ export const Nav = () => {
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
                   >
-                    <h2>blonde</h2>
+                    <h2>Blonde</h2>
                   </div>
                 </Link>
                 <Link to={'/models/black'}>
@@ -236,7 +236,7 @@ export const Nav = () => {
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
                   >
-                    <h2>black</h2>
+                    <h2>Black</h2>
                   </div>
                 </Link>
               </section>
@@ -264,7 +264,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/blonde'}>
+                <Link to={'/models/unshaven'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}

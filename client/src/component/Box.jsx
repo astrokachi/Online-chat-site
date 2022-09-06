@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../Auth';
-import { db, auth } from '../Firebase.js';
-import { addDoc, collection, query, where, onSnapshot, Timestamp, orderBy } from 'firebase/firestore';
+import img from '../assets/moddd/Alexia.png'
+import listReactFiles from 'list-react-files'
+
+
 
 export const Box = (user) => {
   const [state, setState] = useState(false);
+  // listReactFiles(__dirname).then(files => console.log(files))
 
-  // console.log(user.user)
+//   find(function(result) {
+//     console.log(result);
+// }, {
+//     dir: 'assets',
+//     name: 'png'
+// });
+
+  // console.log(user.user.avatar)
 
   return (
     <div
@@ -18,7 +26,7 @@ export const Box = (user) => {
         setState(false);
       }}
     >
-      {user.user.avatar && <img src={user.user.avatar} alt="" className="w-[100%] h-full absolute rounded-sm  " />}
+      {/* {user.user.avatar && <img src={require(`../assets/moddd/${user.user.name }.png`)} alt="" className="w-[100%] h-full absolute rounded-sm  " />} */}
 
       <Link to={`/chat/${user.user.uid}`} onClick={() => {}}>
         <button className="absolute bottom-2 px-3 py-1 z-10 text-sm bg-purp right-4">Chat</button>
