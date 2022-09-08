@@ -44,15 +44,21 @@ export const Footer = () => {
             <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" />
           </div>
           <div className="relative pb-2">
-            <p className="text-sm cursor-pointer hover:text-purp">Privacy Policy</p>
+            <Link to={'/privacy'}>
+              <p className="text-sm cursor-pointer hover:text-purp">Privacy Policy</p>
+            </Link>
             <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" />
           </div>
           <div className="relative pb-2">
-            <p className="text-sm cursor-pointer hover:text-purp">Terms of use</p>
+            <Link to="/terms">
+              <p className="text-sm cursor-pointer hover:text-purp">Terms of use</p>
+            </Link>
             <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" />
           </div>
           <div className="relative pb-2">
-            <p className="text-sm cursor-pointer hover:text-purp">DCMA Policy</p>
+            <Link to="/DCMA">
+              <p className="text-sm cursor-pointer hover:text-purp">DCMA Policy</p>
+            </Link>
             {/* <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" /> */}
           </div>
         </section>
@@ -67,11 +73,15 @@ export const Footer = () => {
             <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" />
           </div> */}
           <div className="relative pb-2">
-            <p className="text-sm cursor-pointer hover:text-purp">Billing Support</p>
+            <Link to="/support/billing">
+              <p className="text-sm cursor-pointer hover:text-purp">Billing Support</p>
+            </Link>
             <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" />
           </div>
           <div className="relative pb-2">
-            <p className="text-sm cursor-pointer hover:text-purp">DCMA Protection</p>
+            <Link to="/DCMA">
+              <p className="text-sm cursor-pointer hover:text-purp">DCMA Protection</p>
+            </Link>
             {/* <div className="absolute border-b bottom-0 border-b-[#909091] w-[100%]" /> */}
           </div>
         </section>
@@ -79,16 +89,26 @@ export const Footer = () => {
 
       <div className="flex flex-col md:flex-row gap-6 md:gap-0">
         <div className="flex items-center gap-6 w-[40%]">
-          <img src={svg1} alt="" className="h-6" />
+          <a
+            target={'_blank'}
+            href="https://www.rtalabel.org/?content=validate&ql=b9b25de5ba5da974c585d9579f8e9d49&rating=RTA-5042-1996-1400-1577-RTA"
+            rel="noreferrer"
+          >
+            <img src={svg1} alt="" className="h-6" />
+          </a>
           <img src={svg2} alt="" className="h-10" />
           <img src={svg3} alt="" className="h-6" />
-          <img src={svg4} alt="" className="h-7" />
+          <a href="https://pineapplesupport.org/about-pineapple-support/" target={'_blank'} rel="noreferrer">
+            <img src={svg4} alt="" className="h-7" />
+          </a>
         </div>
         <div className="border-b bottom-0 border-b-[#909091] w-[100%] md:hidden" />
         <div className=" flex items-center justify-between w-full md:w-[60%]">
-          <h2 className="text-xs hover:text-purp cursor-pointer">
-            18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement
-          </h2>
+          <Link to="/2257">
+            <h2 className="text-xs hover:text-purp cursor-pointer">
+              18 U.S.C. 2257 Record-Keeping Requirements Compliance Statement
+            </h2>
+          </Link>
           <img src={svg5} alt="" className="h-9" />
         </div>
       </div>

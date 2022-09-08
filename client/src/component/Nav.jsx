@@ -172,7 +172,7 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">BODY TYPE</h2>
                 </div>
 
-                <Link to="/models/skinny">
+                <Link to="/models/skinny models">
                   <div
                     className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -181,7 +181,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to="/models/curvy">
+                <Link to="/models/curvy models">
                   <div
                     className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -190,7 +190,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to="/models/fit">
+                <Link to="/models/fit models">
                   <div
                     className="flex w-full items-center cursor-pointer gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -205,7 +205,7 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">HAIR</h2>
                 </div>
 
-                <Link to={'/models/brown'}>
+                <Link to={'/models/brown haired models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -214,7 +214,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/copper shimmer'}>
+                <Link to={'/models/copper shimmer haired models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -223,7 +223,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/blonde'}>
+                <Link to={'/models/blonde haired models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -231,7 +231,7 @@ export const Nav = () => {
                     <h2>Blonde</h2>
                   </div>
                 </Link>
-                <Link to={'/models/black'}>
+                <Link to={'/models/black haired models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -246,7 +246,7 @@ export const Nav = () => {
                   <h2 className="text-sm text-gray-400">POPULAR</h2>
                 </div>
 
-                <Link to="/models/small tits">
+                <Link to="/models/small tit models">
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -255,7 +255,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/big tits'}>
+                <Link to={'/models/big tits models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -264,7 +264,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/unshaven'}>
+                <Link to={'/models/unshaven models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -273,7 +273,7 @@ export const Nav = () => {
                   </div>
                 </Link>
 
-                <Link to={'/models/shaven'}>
+                <Link to={'/models/shaven models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -281,7 +281,7 @@ export const Nav = () => {
                     <h2>Shaven</h2>
                   </div>
                 </Link>
-                <Link to={'/models/squirt'}>
+                <Link to={'/models/squirt models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -289,7 +289,7 @@ export const Nav = () => {
                     <h2>Squirt</h2>
                   </div>
                 </Link>
-                <Link to={'/models/big ass'}>
+                <Link to={'/models/big ass models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}
@@ -297,7 +297,7 @@ export const Nav = () => {
                     <h2>Big ass</h2>
                   </div>
                 </Link>
-                <Link to={'/models/cute ass'}>
+                <Link to={'/models/cute ass models'}>
                   <div
                     className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
                     onClick={() => setIsToggle(true)}

@@ -1,22 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import img from '../assets/moddd/Alexia.png'
-import listReactFiles from 'list-react-files'
-
-
+// import alexia from '../assets/moddd/Alexia.png';
 
 export const Box = (user) => {
   const [state, setState] = useState(false);
-  // listReactFiles(__dirname).then(files => console.log(files))
-
-//   find(function(result) {
-//     console.log(result);
-// }, {
-//     dir: 'assets',
-//     name: 'png'
-// });
-
-  // console.log(user.user.avatar)
 
   return (
     <div
@@ -26,7 +13,7 @@ export const Box = (user) => {
         setState(false);
       }}
     >
-      {/* {user.user.avatar && <img src={require(`../assets/moddd/${user.user.name }.png`)} alt="" className="w-[100%] h-full absolute rounded-sm  " />} */}
+      {user.user.avatar && <img src={require(`../assets/moddd/${user.user.email.split('@')[0].toLowerCase()}.png`)} alt="" className="w-[100%] h-full absolute rounded-sm  " />}
 
       <Link to={`/chat/${user.user.uid}`} onClick={() => {}}>
         <button className="absolute bottom-2 px-3 py-1 z-10 text-sm bg-purp right-4">Chat</button>
@@ -40,7 +27,6 @@ export const Box = (user) => {
         }   transition-all duration-100 ease-in-out`}
       >
         <p className=" w-full text-sm">{user.user.name}</p>
-        {/* <p className=''>{user.user?.about?.split('...')[0] || user.user.about}</p> */}
       </div>
     </div>
   );

@@ -15,6 +15,11 @@ import Chats from './component/Chats';
 import { Profile } from './component/Profile';
 import { Book } from './pages/Book';
 import { ProfileClient } from './component/ProfileClient';
+import Policy from './pages/Policy';
+import Privacy from './pages/Privacy';
+import { Terms } from './pages/Terms';
+import DCMA from './pages/DCMA';
+import Billing from './pages/Billing';
 
 
 
@@ -32,6 +37,11 @@ function App() {
       <Route path='/' element={<Initial /> } />
       <Route path='/landing' element={<Home />} />
       <Route path='/home' element={<HomePage />} />
+      <Route path='/2257' element={<Policy />} />
+      <Route path='/privacy' element={<Privacy />} />
+      <Route path='/terms' element={<Terms />} />
+      <Route path='/DCMA' element={<DCMA />} />
+      <Route path='/support/billing' element={<Billing />} />
       <Route path='/models/:pref' element={<HomePage />} />
       <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
       <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
