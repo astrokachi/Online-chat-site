@@ -57,6 +57,9 @@
   stroke-linejoin: round;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
   
 
   .app{
