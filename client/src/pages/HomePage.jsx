@@ -6,6 +6,7 @@ import { Footer } from '../component/Footer';
 import { Nav } from '../component/Nav';
 import { AuthContext } from '../Auth';
 import { Link, useParams } from 'react-router-dom';
+import { createRef } from 'react';
 // import { db, auth } from '../firebase';
 // import { collection, query, where, onSnapshot } from 'firebase/firestore';
 // import { useEffect } from 'react';
@@ -20,6 +21,8 @@ export const HomePage = () => {
   // const [page, setPage] = useState([]);
   pref = pref?.toLowerCase();
 
+
+
   useEffect(() => {
     let place = [...models];
     place = users.filter((model) => model?.email.includes('-model'));
@@ -27,21 +30,26 @@ export const HomePage = () => {
   }, [users]);
 
   const paginate = (index) => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     if (index >= 1) {
       setStart(20 * index);
-      setEnd(20 + 20 * index);
+      setEnd(20 + (20 * index));
     } else if (index < 1) {
       setStart(0);
       setEnd(20);
     }
   };
 
+  console.log(models.length);
+
   return (
-    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`}>
+    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`} >
       <Nav />
       <div className="flex w-full" onClick={() => setIsToggle(true)}>
         <div className="bg-gradient-to-b w-full pb-24 transition-all ease duration-150 min-h-screen text-white from-start text-center to-black sm:px-6 md:px-14 py-32">
-          <p className="font-medium text-lg text-left pt-8 pb-2 px-3">{pref ? `${pref.toUpperCase()}` : 'ALL MODELS'}</p>
+          <p className="font-medium text-lg text-left pt-8 pb-2 px-3">
+            {pref ? `${pref.toUpperCase()}` : 'ALL MODELS'}
+          </p>
           <div
             id="container"
             className="grid grid-cols-2 md:grid-cols-3  lg:grid-cols-5 gap-x-8 px-3  lg:gap-x-5 gap-y-8 "
@@ -74,20 +82,21 @@ export const HomePage = () => {
           </div>
 
           <div className="flex justify-center gap-3 w-full mt-12">
-            {!pref && [...Array(Math.round(models.length / 20))].map((_, i) => {
-              console.log(Math.round(models.length / 20) - Math.round(models.length / end));
-              return (
-                <div
-                  key={i}
-                  onClick={() => paginate(i)}
-                  className={`px-3 h-1 text-sm bg-purp hover:bg-opacity-100 cursor-pointer rounded-lg transition-all ease-in duration-200 ${
-                    Math.round(models.length / 20) - Math.round(models.length / end) === i
-                      ? 'bg-opacity-100'
-                      : 'bg-opacity-70'
-                  }`}
-                ></div>
-              );
-            })}
+            {!pref &&
+              [...Array(Math.round(60 / 20))].map((_, i) => {
+                console.log(Math.round(models.length / 20) - Math.round(models.length / end));
+                return (
+                  <div
+                    key={i}
+                    onClick={() => paginate(i)}
+                    className={`px-3 h-1 text-sm bg-purp hover:bg-opacity-100 cursor-pointer rounded-lg transition-all ease-in duration-200 ${
+                      Math.round(Math.round(models.length / 20) - Math.round(models.length / end)) === i
+                        ? 'bg-opacity-70'
+                        : 'bg-opacity-70'
+                    }`}
+                  ></div>
+                );
+              })}
           </div>
         </div>
       </div>

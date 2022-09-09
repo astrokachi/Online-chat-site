@@ -4,7 +4,7 @@ import logo from '../assets/Logo.svg';
 
 export const Initial = () => {
   return (
-    <div className="bg-gradient-to-b  from-start text-center to-black relative flex font-normal items-center flex-col text-white px-3 py-9">
+    <div className="bg-gradient-to-b  from-start text-center to-black  relative flex font-normal items-center flex-col text-white px-3 py-9">
       <header className="italiano text-3xl mb-10 flex items-center gap-2">
         RSangels <img className="h-7" src={logo} alt="logo" />{' '}
       </header>
@@ -14,7 +14,9 @@ export const Initial = () => {
         now for FREE.
       </p>
 
-      <Link to='/landing'><button className="bg-white rounded-[25px] font-medium mt-9 px-9 py-2 w-max text-black">I'm over 18</button></Link>
+      <Link to="/landing">
+        <button className="bg-white rounded-[25px] font-medium mt-9 px-9 py-2 w-max text-black">I'm over 18</button>
+      </Link>
 
       <p className="text-xs max-w-xl pt-10 pb-11">
         By entering and using this website you agree to be bound by the Terms of Use and Privacy Policy 18 U.S.C. 2257

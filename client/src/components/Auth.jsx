@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Input } from './Input';
 
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import { auth } from '../Firebase';
 import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-
-
+import pic from '../assets/pic.png';
 
 const initialState = {
   name: '',
@@ -22,7 +26,7 @@ export const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
   const [isMatch, setIsMatch] = useState(true);
-  // const [error, setError] = useState('');
+  const [password, setPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,12 +38,14 @@ export const Auth = () => {
     else setIsMatch(false);
 
     if (isMatch) {
-       handleSubmit(e);
+      handleSubmit(e);
     }
   };
+
   useEffect(() => {
-    // console.log(form);
+    console.log(form);
   }, [form]);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -60,16 +66,18 @@ export const Auth = () => {
       });
       // const auth = getAuth();
       updateProfile(auth.currentUser, {
-        displayName: form.name
-      }).then(() => {
-        // Profile updated!
-        console.log('done')
-        // ...
-      }).catch((error) => {
-        // An error occurred
-        console.log(error)
-        // ...
-      });
+        displayName: form.name,
+      })
+        .then(() => {
+          // Profile updated!
+          console.log('done');
+          // ...
+        })
+        .catch((error) => {
+          // An error occurred
+          console.log(error);
+          // ...
+        });
       navigate('/');
       setForm({ name: '', email: '', password: '', error: null, loading: false });
     } catch (error) {
@@ -93,11 +101,25 @@ export const Auth = () => {
     }
   };
 
+  async function forgotPassword() {
+    try {
+      await sendPasswordResetEmail(auth, form.email);
+      setPassword(true);
+    } catch (error) {
+      console.log(error);
+      setForm({ ...form, error: 'msg: Please enter an email'})
+    }
+  }
+
   return (
     <div className="h-full w-full">
       <div className="grid grid-flow-col md:grid-cols-2 p-0 m-0 h-screen w-full overflow-hidden">
         <div className="relative flex h-full w-full justify-center items-center bg-white">
-          <div className={`py-10 px-14 div1 w-full absolute ${!isSignup ? 'open z-10' : 'close -z-10'} `}>
+          <div
+            className={`py-10 px-14 div1 w-full absolute ${!isSignup ? 'open z-10' : 'close -z-10'} ${
+              password && 'hidden'
+            }`}
+          >
             <div>
               <header className="italiano text-purp text-5xl mb-12">RSangels</header>
               <h1 className="text-2xl font-medium pb-2">Log in.</h1>
@@ -136,10 +158,27 @@ export const Auth = () => {
                 Sign up
               </span>
             </h4>
-            <h4 className="text-purp text-sm text-center ">Forgot Password?</h4>
+            <h4 className="text-purp text-sm text-center cursor-pointer" onClick={() => forgotPassword()}>
+              Forgot Password?
+            </h4>
           </div>
           {/* : */}
-          <div className={`py-10 px-14 h-max div w-full absolute  ${isSignup ? 'open z-10' : 'close -z-10'} `}>
+
+          <div className={`py-10 px-14 h-max div w-full absolute top-0  ${password ? 'block' : 'hidden'}`}>
+            <div className="">
+              <header className="italiano text-purp text-5xl ">RSangels</header>
+            </div>
+
+            <p className="text-black text-sm mt-32">
+              Please check your email for the password reset link. If not found in your please check your spam{' '}
+            </p>
+          </div>
+
+          <div
+            className={`py-10 px-14 h-max div w-full absolute  ${isSignup ? 'open z-10' : 'close -z-10'} ${
+              password && 'hidden'
+            }`}
+          >
             <div className="">
               <header className="italiano text-purp text-5xl mb-12">RSangels</header>
               <h1 className="text-2xl font-medium pb-2">Sign up.</h1>
@@ -197,13 +236,15 @@ export const Auth = () => {
                 Log in
               </span>
             </h4>
-            <h4 className="text-purp text-sm text-center">Forgot Password?</h4>
+            <h4 className="text-purp text-sm text-center cursor-pointer" onClick={() => forgotPassword()}>
+              Forgot Password?
+            </h4>
           </div>
         </div>
 
         {/* } */}
-        <section className="bg-gradient-to-b h-screen via-end from-start to-end relative hidden md:block">
-          {/* <img src="" alt="" /> */}
+        <section className="bg-gradient-to-b h-screen via-end from-start to-end relative hidden md:flex md:justify-center items-center">
+          <img src={pic} alt="s" className="w-[80%]" />
         </section>
       </div>
     </div>

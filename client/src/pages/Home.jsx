@@ -8,7 +8,7 @@ import back3 from '../assets/Group91.png';
 
 export const Home = () => {
   return (
-    <div className="bg-gradient-to-b lg:overflow-hidden overflow-x-hidden min-h-screen relative max-w-[100vw] w-[100vw] text-white from-start text-center to-black ">
+    <div className="bg-gradient-to-b  overflow-x-hidden min-h-screen relative max-w-[100vw] w-[100vw] text-white from-start text-center to-black ">
       {/* <Nav /> */}
       <header className="italiano text-3xl flex items-center gap-2 flex-1 justify-center p-4 mt-4">
         RSangels <img className="h-7" src={logo} alt="logo" />{' '}
