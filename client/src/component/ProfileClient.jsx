@@ -32,19 +32,29 @@ export const ProfileClient = () => {
   const arr = [body, interest, zodiac, hair, eye, height, age, inte, rules];
 
   return (
-    <div className={`${!isToggle && 'overflow-y-hidden h-[100vh]'}`}>
+    <div
+      className={`overflow-x-hidden ${!isToggle && 'overflow-hidden h-[100vh] w-[100vw]'} ${
+        grow && 'overflow-hidden h-[100vh] w-[100vw]'
+      }`}
+    >
       <Nav />
       <div className={` `}>
         <div
-        onClick={() => setIsToggle(true)}
+          onClick={() => setIsToggle(true)}
           className={`bg-gradient-to-b  relative text-white md:px-14 sm:px-6 md:py-16 py-32 from-start text-center to-black `}
         >
           <main className="bg-purp bg-opacity-10 h-max w-[90%] mb-8 mt-12 p-4 pb-24 mx-auto">
             <section className="text-gray-400 text-sm pt-4">{user?.name}'s profile</section>
             <div className="flex justify-center mt-3 ">
               <div className="w-full flex items-center flex-col   p-5">
-                <div className="h-24 w-24 rounded-[50%] bg-gray-400  relative cursor-pointer">
-                  {user?.avatar && <img src={user?.avatar || ''} alt="" className="h-24 w-24 rounded-[50%]" />}
+                <div className="h-24 w-24 rounded-[50%] bg-gray-400  cursor-pointer">
+                  {user?.avatar && (
+                    <img
+                      src={require(`../assets/moddd/${user?.email?.split('@')[0].toLowerCase()}.png`)}
+                      alt=""
+                      className="h-24 w-24 rounded-[50%]"
+                    />
+                  )}
                 </div>
 
                 <h3 className="text-sm  pt-4">{user?.name}</h3>
@@ -55,7 +65,7 @@ export const ProfileClient = () => {
                       Chat
                     </button>
                   </Link>
-                  <Link to={`/book/${user?.uid}`}> 
+                  <Link to={`/book/${user?.name}`}>
                     <button className="px-5 py-2 bg-purp rounded mt-3 text-white transition-all ease duration-200 hover:scale-95">
                       Book
                     </button>
@@ -90,10 +100,10 @@ export const ProfileClient = () => {
                     {item && (
                       <div className="grid grid-cols-6 justify-center mb-4 gap-[2%] text-sm nnnn" key={item}>
                         <p className="text-right" style={{ gridColumn: 'span 2' }}>
-                          {item?.split(':')[0]}:{' '}
+                          {item?.split(':') !== '' && item.split(':') && item?.split(':')[0]}:{' '}
                         </p>
                         <h2 className="text-left" style={{ gridColumn: 'span 3' }}>
-                          {item?.split(':')[1]}
+                          {item?.split(':') !== '' && item.split(':') && item?.split(':')[1]}
                         </h2>
                       </div>
                     )}
@@ -107,14 +117,18 @@ export const ProfileClient = () => {
             <div>
               <header className="text-sm">More pictures</header>
               <section className="flex justify-center items-center gap-3 px-6  pt-8 max-w-full flex-wrap ">
-                {/* {grow && (
-      <div
-        className={`absolute top-0 flex justify-center items-center w-[100vw] h-[100vh] z-50 cursor-zoom-out bg-slate-800 bg-opacity-70`}
-        onClick={() => setGrow(false)}
-      >
-        <img src={user[`images${imgNo}`]} alt="s" className="w-max h-[95%] rounded-md" />
-      </div>
-    )} */}
+                {grow && (
+                  <div
+                    className={`absolute top-0 flex  justify-center items-center w-[100vw] h-[100vh] z-50 cursor-zoom-out bg-slate-800 bg-opacity-70`}
+                    onClick={() => setGrow(false)}
+                  >
+                    <img
+                      src={user?.email.includes('-model') ? require(`../assets/moddd/${user?.email?.split('@')[0].toLowerCase()}${imgNo}.png`) : user[`images${imgNo}`]}
+                      alt="s"
+                      className="w-sceen h-screen rounded-md"
+                    />
+                  </div>
+                )}
                 {[...Array(number)].map((_, index) => {
                   return (
                     <div
@@ -127,16 +141,15 @@ export const ProfileClient = () => {
                         'md:w-[35%] w-[47%] lg:w-[24%] md:h-[350px] '
                       }  rounded bg-gray-400  cursor-pointer hover:scale-105 transition-all ease-in duration-[350ms]`}
                     >
-                      {user && !user[`images${index}`]?.includes('undefined') && (
-                        <a href={user[`images${index}`]} target="_blank" rel="noreferrer">
-                          <img src={user[`images${index}`]} alt="" className="h-full w-full rounded  " />
-                        </a>
+                      {user && user[`images${index}`] && !user[`images${index}`]?.includes('undefined') && (
+                        // <a href={user[`images${index}`]} target="_blank" rel="noreferrer">
+                        <img
+                        src={user?.email.includes('-model') ? require(`../assets/moddd/${user?.email?.split('@')[0].toLowerCase()}${index}.png`) : user[`images${index}`]}
+                          alt=""
+                          className="h-full w-full rounded  "
+                        />
+                        // </a>
                       )}
-                      <div>
-                        <label htmlFor="photo"></label>
-                        <input type="file" id="photo" accept="image/*" className="hidden" />
-                        {/* <h2 className='text-xs text-black font-medium absolute bottom-3 left-[50%] translate-x-[-50%] w-max'>Click to upload</h2> */}
-                      </div>
                     </div>
                   );
                 })}

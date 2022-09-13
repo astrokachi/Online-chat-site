@@ -22,7 +22,7 @@ export const Home = () => {
           <p className="text-4xl pb-12 md:text-left md:max-w-sm">Find and Meet Beautiful Models.</p>
 
           <p className="md:text-left text-sm md:pb-20 pb-10 md:max-w-[370px]">
-            Lörem ipsum nigora spesk varuska gofossa döda vinkeln-varnare. Hos kvasiform, utom telen direr androism.{' '}
+            Create an account with us to get started.{' '}
           </p>
 
           <div className="md:w-max ">

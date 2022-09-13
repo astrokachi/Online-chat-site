@@ -33,8 +33,10 @@ export const Initial = () => {
         <div className="w-full border-b border-b-white" />
       </div>
 
-      <h3 className="underline pt-6 pb-3">Exit Here</h3>
-
+      <a href="https://www.google.com">
+        <h3 className="underline pt-6 pb-3">Exit Here</h3>
+      </a>
+      
       <p className="text-sm max-w-3xl pb-4">
         THIS WEBSITE CONTAINS MATERIAL THAT IS SEXUALLY EXPLICIT. You must be at least eighteen (18) years of age to use
         this Website, unless the age of majority in your jurisdiction is greater than eighteen (18) years of age, in

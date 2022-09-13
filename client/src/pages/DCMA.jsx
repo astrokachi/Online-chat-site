@@ -80,9 +80,7 @@ const DCMA = () => {
           <i className="block">512 Lucerne Ave</i>
           <i className="block">Lake Worth, FL 33460</i>
           <i className="block">United States</i>
-          <i className="block">Phone: (800) 371-1217</i>
-          <i className="block">Fax: (800) 371-0235</i>
-          <i className="block">Email: notice@incorporatenow.com</i>
+          <i className="block">Email: incorporatenownotice@outlook.com</i>
           <br />
           <b>*Please do not send other inquiries or information to our Designated Agent.</b>
 <br />

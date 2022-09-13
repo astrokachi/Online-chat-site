@@ -77,7 +77,7 @@ const Chats = () => {
               <img src={back} alt="back" className="w-5 h-5 text-white cursor-pointer" />
             </Link>
             <div className="h-14 w-14 rounded-[50%] bg-gray-400 relative">
-              {user?.avatar && <img src={user?.avatar || ''} alt="" className="h-14 w-14 rounded-[50%]" />}
+              {user?.avatar && <img src={user.avatar} alt="" className="h-14 w-14 rounded-[50%]" />}
             </div>
             <div className="text-white text-left ">
               <h3 className="flex items-center gap-2">
@@ -87,7 +87,7 @@ const Chats = () => {
                 </span>
                 <div className={`h-2 w-2 rounded-[50%] ${'bg-green-400'}`}></div>
               </h3>
-              <h2>{user?.email.includes('-model') ? user.email.split('-')[0] : user?.email}</h2>
+              <h2>{user?.email.includes('-model') ? user.name : user?.email}</h2>
             </div>
           </header>
 

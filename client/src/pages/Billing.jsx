@@ -18,24 +18,12 @@ const Billing = () => {
             Email: help@paymentico.com
             <br />
             <br />
-            Phone: 1-855-877-7020 (USA/Canada Toll Free)
-            <br />
-            <br />
-            Phone: +441344586020 (UK/International)
-            <br />
-            <br />
             Epoch members:
             <br />
             Billing support: https://www.epoch.com/billing_support/find_purchase
             <br />
             <br />
             Email: billing@epoch.com
-            <br />
-            <br />
-            Phone Toll Free: +1 800 893 8871
-            <br />
-            <br />
-            Phone Worldwide: +1 310 664 5810
             <br />
             <br />
             SegPay members:
@@ -46,9 +34,6 @@ const Billing = () => {
             Email: help@segpay.com
             <br />
             <br />
-            Phones: +1-954-414-1610 and 1-888-376-0948
-            <br />
-            <br />
             CentroBill members:
             <br />
             Customer self service: https://centrohelp.com/
@@ -57,10 +42,7 @@ const Billing = () => {
             Email: support@centrobill.com
             <br />
             <br />
-            Phone support: +1-877-778-8382
-            <br />
-            <br />
-            Webbiling members: 
+            Webbiling members:
             <br />
             Contact email: usersupport@webbilling.com
             <br />
@@ -71,7 +53,6 @@ const Billing = () => {
             Email: customerservice@wtseticket.com
             <br />
             <br />
-            Phone: +1-800-975-5616
           </p>
         </div>
       </section>

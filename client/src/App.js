@@ -45,7 +45,7 @@ function App() {
       <Route path='/models/:pref' element={<HomePage />} />
       <Route path='/chats' element={<PrivateRoute><Chats /></PrivateRoute>} />
       <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
-      <Route path='/book/:id' element={<PrivateRoute> <Book /> </PrivateRoute>} />
+      <Route path='/book/:name' element={<PrivateRoute> <Book /> </PrivateRoute>} />
       <Route path='/:id/profile' element={<PrivateRoute> <ProfileClient /> </PrivateRoute>} />
     </Routes>
     </AuthProvider>

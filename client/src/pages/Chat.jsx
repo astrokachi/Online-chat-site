@@ -6,10 +6,9 @@ import { MessageForm } from '../component/MessageForm';
 import { AuthContext } from '../Auth';
 
 import Message from '../component/Message';
-import back from '../assets/back.svg'
+import back from '../assets/back.svg';
 
 export const Chat = () => {
-
   const { id } = useParams();
   const { users } = useContext(AuthContext);
   const [msgs, setMsgs] = useState([]);
@@ -17,7 +16,7 @@ export const Chat = () => {
   const [image, setImage] = useState(false);
   const [imgNo, setImgNo] = useState(0);
   const otherUser = users.filter((user) => user.uid === id);
-  const {isToggle, setIsToggle} = useContext(AuthContext)
+  const { isToggle, setIsToggle } = useContext(AuthContext);
 
   const about = otherUser[0]?.about?.split('...')[0];
   const body = otherUser[0]?.about?.split('...')[1];
@@ -30,22 +29,27 @@ export const Chat = () => {
   const inte = otherUser[0]?.about?.split('...')[8];
   const rules = otherUser[0]?.about?.split('...')[9];
 
+  console.log(otherUser[0]);
 
   return (
-    
     <div className="grid md:grid-cols-5 h-screen overflow-hidden relative bg-gradient-to-b from-start  to-black">
       <div
         className="flex-col items-center pt-14 overflow-y-scroll scrolls hidden md:flex border-r border-r-gray-400 bg-purp bg-opacity-20 text-white"
         style={{ gridColumn: 'span 2' }}
       >
-        <div className="h-24 w-24 min-h-max rounded-[50%] bg-gray-400 " style={{height: "96px;!important" , width:"96px"}}>
+        <div
+          className="h-24 w-24 min-h-max rounded-[50%] bg-gray-400 "
+          style={{ height: '96px;!important', width: '96px' }}
+        >
           {otherUser[0]?.avatar && <img src={otherUser[0].avatar} alt="" className="h-24 w-24 rounded-[50%]" />}
         </div>
-        
+
         <h3 className="text-white text-base font-bold">{otherUser[0]?.name}</h3>
-        <button className="px-5 py-2 bg-purp rounded mt-3 text-white transition-all ease duration-200 hover:scale-95">
-          Book {otherUser[0]?.name}
-        </button>
+        <Link to={`/book/${otherUser[0]?.name}`}>
+          <button className="px-5 py-2 bg-purp rounded mt-3 text-white transition-all ease duration-200 hover:scale-95">
+            Book {otherUser[0]?.name}
+          </button>
+        </Link>
 
         {/* <div className="w-[100%] mt-6 border-b border-b-gray-200 " /> */}
         <div className="card w-[90%] bg-purp bg-opacity-40 mt-4 rounded-md p-8">
@@ -82,9 +86,19 @@ export const Chat = () => {
                       : 'hidden'
                   }  rounded bg-gray-400 relative cursor-zoom-in`}
                 >
-                  {otherUser[0] && !otherUser[0][`images${index}`]?.includes('undefined') && (
-                    <img src={otherUser[0][`images${index}`]} alt="" className="h-full w-full rounded" />
-                  )}
+                  {otherUser[0] &&
+                    otherUser[0][`images${index}`] &&
+                    !otherUser[0][`images${index}`]?.includes('undefined') && (
+                      <img
+                        src={
+                          otherUser[0]?.email.includes('-model')
+                            ? require(`../assets/moddd/${otherUser[0]?.email?.split('@')[0].toLowerCase()}${index}.png`)
+                            : otherUser[0][`images${imgNo}`]
+                        }
+                        alt=""
+                        className="h-full w-full rounded"
+                      />
+                    )}
                 </div>
               );
             })}
@@ -92,8 +106,19 @@ export const Chat = () => {
         </div>
       </div>
       {image && (
-        <div className={`absolute flex justify-center items-center w-[100vw] h-[100vh] z-50 cursor-zoom-out bg-slate-800 bg-opacity-70`} onClick={() => setImage(false)}>
-          <img src={otherUser[0][`images${imgNo}`]} alt="s" className="w-max h-[95%] rounded-md"  />
+        <div
+          className={`absolute flex justify-center items-center w-[100vw] h-[100vh] z-50 cursor-zoom-out bg-slate-800 bg-opacity-70`}
+          onClick={() => setImage(false)}
+        >
+          <img
+            src={
+              otherUser[0]?.email.includes('-model')
+                ? require(`../assets/moddd/${otherUser[0]?.email?.split('@')[0].toLowerCase()}${imgNo}.png`)
+                : otherUser[0][`images${imgNo}`]
+            }
+            alt="s"
+            className="w-max h-[95%] rounded-md"
+          />
         </div>
       )}
       <div
@@ -101,17 +126,23 @@ export const Chat = () => {
         style={{ gridColumn: 'span 3' }}
       >
         <header className="bg-purp bg-opacity-100 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center">
-          <Link to='/chats'><img src={back} alt="" className='h-6 w-6 cursor-pointer' /></Link>
-          <div className="h-16 w-16 rounded-[50%] bg-gray-400">
-            {otherUser[0]?.avatar && <img src={otherUser[0].avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
-          </div>
-          <div className="text-white text-left ">
-            <h3 className="flex items-center gap-2">
-              {otherUser[0]?.name}{' '}
-              <div className={`h-2 w-2 rounded-[50%] ${otherUser[0]?.isOnline ? 'bg-green-400' : 'bg-red-500'}`}></div>
-            </h3>
-            {/* <h2>{otherUser[0]?.email}</h2> */}
-          </div>
+          <Link to="/chats">
+            <img src={back} alt="" className="h-6 w-6 cursor-pointer" />
+          </Link>
+          <Link to={`/${otherUser[0]?.uid}/profile`} className="flex items-center gap-4">
+            <div className="h-16 w-16 rounded-[50%] bg-gray-400">
+              {otherUser[0]?.avatar && <img src={otherUser[0].avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
+            </div>
+            <div className="text-white text-left ">
+              <h3 className="flex items-center gap-2">
+                {otherUser[0]?.name}{' '}
+                <div
+                  className={`h-2 w-2 rounded-[50%] ${otherUser[0]?.isOnline ? 'bg-green-400' : 'bg-red-500'}`}
+                ></div>
+              </h3>
+              {/* <h2>{otherUser[0]?.email}</h2> */}
+            </div>
+          </Link>
         </header>
 
         <div className="pt-32 px-3 pb-24 ">

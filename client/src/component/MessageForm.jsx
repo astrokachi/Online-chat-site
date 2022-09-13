@@ -55,7 +55,7 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
 
     try {
       let url;
-      if (img) { 
+      if (img) {
         const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`);
         const snap = await uploadBytes(imgRef, img);
         const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
@@ -69,18 +69,16 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
         media: url || '',
       });
 
-
       setText('');
 
       await setDoc(doc(db, 'lastMsg', id), {
-        text: text || 'New media',
+        text: text,
         from: user.uid,
         to: otherUser.uid,
         createdAt: Timestamp.fromDate(new Date()),
         media: url || '',
         unread: true,
       });
-     
     } catch (error) {
       console.log(error);
     }
@@ -93,7 +91,6 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
       <input
         onChange={(e) => {
           setImg(e.target.files[0]);
-          
         }}
         type="file"
         id="img"

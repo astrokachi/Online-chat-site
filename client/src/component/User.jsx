@@ -30,7 +30,7 @@ export const User = ({ c, m }) => {
     <Link to={`/chat/${c ? c?.uid : m?.uid}`}>
       <header className="bg p-4 flex gap-4 w-full hover:bg-purp hover:bg-opacity-10">
         <div className="h-16 w-16 rounded-[50%] bg-gray-400">
-          {m?.avatar && <img src={m.avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
+           {m ?  m?.avatar && <img src={require(`../assets/moddd/${m?.email?.split('@')[0].toLowerCase()}.png`)} alt="" className="h-16 w-16 rounded-[50%]" /> : c?.avatar && <img src={c.avatar} alt="" className="h-16 w-16 rounded-[50%]" />}
         </div>
         <div className="text-white text-left flex-grow">
           <h3 className="flex items-center gap-2">

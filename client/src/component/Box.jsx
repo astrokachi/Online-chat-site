@@ -18,7 +18,7 @@ export const Box = (user) => {
       <Link to={`/chat/${user.user.uid}`} onClick={() => {}}>
         <button className="absolute bottom-2 px-3 py-1 z-10 text-sm bg-purp right-4">Chat</button>
       </Link>
-      <Link to={`/book/${user.user.uid}`}>
+      <Link to={`/book/${user.user.name}`}>
         <button className="absolute bottom-2 px-3 py-1 text-sm z-10 bg-purp  left-4">Book</button>
       </Link>
       <div

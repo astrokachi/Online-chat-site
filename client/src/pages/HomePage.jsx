@@ -90,8 +90,8 @@ export const HomePage = () => {
                     key={i}
                     onClick={() => paginate(i)}
                     className={`px-3 h-1 text-sm bg-purp hover:bg-opacity-100 cursor-pointer rounded-lg transition-all ease-in duration-200 ${
-                      Math.round(Math.round(models.length / 20) - Math.round(models.length / end)) === i
-                        ? 'bg-opacity-70'
+                      Math.round(Math.round(60 / 20) - Math.round(60 / end)) === i
+                        ? 'bg-opacity-100'
                         : 'bg-opacity-70'
                     }`}
                   ></div>

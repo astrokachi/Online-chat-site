@@ -22,7 +22,7 @@ export const Nav = () => {
   const doSearch = (value) => {
     // console.log(value);
     setQuery(value);
-    if (models && value.length > 0) {
+    if (models && value?.length > 0) {
       let newM = [...holder];
       newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
       setModels(newM);
@@ -305,6 +305,14 @@ export const Nav = () => {
                     <h2>Cute ass</h2>
                   </div>
                 </Link>
+                <Link to={'/models/fat ass models'}>
+                  <div
+                    className="flex w-full items-center gap-3 cursor-pointer hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm"
+                    onClick={() => setIsToggle(true)}
+                  >
+                    <h2>fat ass</h2>
+                  </div>
+                </Link>
               </section>
             </main>
 
@@ -370,7 +378,7 @@ export const Nav = () => {
         </section>
       </div>
 
-      {query && query !== '' && models.length > 0 && (
+      {query && query !== '' && models?.length > 0 && (
         <div className=" absolute p-2 md:w-[500px] w-full bg-[#101030] max-h-[300px] overflow-y-scroll scrolls md:left-[50%] md:translate-x-[-50%] ">
           {models?.map((model) => (
             <UserSearch model={model} key={model.uid} />
