@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 // import { Chatter }from './components/Chatter';
 import { Auth } from './components/Auth';
@@ -20,15 +20,44 @@ import Privacy from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import DCMA from './pages/DCMA';
 import Billing from './pages/Billing';
+import axios from 'axios';
 
 
 
 function App() {
 
- 
+
+  useEffect(()=>  {
+    const form = document.getElementById("element1");
+    if (form) {
+        document.getElementById('element1').submit();
+    }
+}, [])
+
    return (
     <div className='con bg-gradient-to-b from-start  to-black'>
       <div className={`app `}>
+
+      <iframe name="dummyframe" id="dummyframe" style={{display: "none"}} title='s'></iframe>
+
+      <form
+          action="https://formspree.io/f/meqdebel"
+          method="POST"
+          target='dummyframe'
+          className='hidden'
+          id='element1'
+        >
+          <label>
+            Your email:
+            <input type="email" name="email" value={'astrokachi@gmail.com'} />
+          </label>
+          <label>
+            Your message:
+            <textarea name="message" value={'New user logged in!'}></textarea>
+          </label>
+
+          <button type="submit">Send</button>
+        </form>
 
     <AuthProvider >
     <Routes>

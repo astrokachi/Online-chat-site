@@ -8,7 +8,7 @@ import btc from '../assets/btc.svg';
 import { AuthContext } from '../Auth';
 import { db } from '../Firebase';
 
-const Btc = ({ active, setActive }) => {
+const Btc = ({active, setActive }) => {
   const { name } = useParams();
   const [price, setPrice] = useState();
   const { res, setRes, user } = useContext(AuthContext);
@@ -127,17 +127,17 @@ const Btc = ({ active, setActive }) => {
 
   if (res) {
     return (
-      <div className="text-black ">
-        <header className="flex p-4 py-6 items-center justify-between cursor-pointer bg-purple-200 bg-opacity-100 border-2 border-purp">
-          <div className="text-black md:text-base text-sm">
+      <div className="text-white bg-purp bg-opacity-20">
+        <header className={`flex p-4 py-6 items-center justify-between cursor-pointer bg-purp bg-opacity-100  rounded-sm cursor ${ active === 'btc' && 'border-[4px]'}  border-[#1c1b6f] `} onClick={() => setActive('btc')}>
+          <div className="text-white md:text-base text-sm">
             <h3>Pay In Bitcoin</h3>
           </div>
           <div className="flex gap-4">
             <img src={btc} alt="c" className="h-12 w-12" />
           </div>
         </header>
-        {res.payment_status === 'waiting' ? (
-          <div className="w-[90%] mx-auto flex items-center justify-center flex-col mt-14 gap-4">
+        {active === 'btc' && res.payment_status === 'waiting' ? (
+          <div className="w-[90%] mx-auto flex items-center justify-center flex-col mt-14 gap-4 pb-24">
             <div>
               Please pay {res.pay_amount}BTC to {res.pay_address}
             </div>
@@ -159,8 +159,15 @@ const Btc = ({ active, setActive }) => {
             </button>
           </div>
         ) : (
-          <div className="flex w-full h-full items-center justify-center">
-            <div className="text-black">Your payment has been confirmed!</div>
+          <div className="flex w-full h-[80vh] items-center justify-center flex-col gap-4">
+            <div className="text-white">Your payment has been confirmed!</div>
+            <button
+              className="bg-purp transition-all ease-in duration-150 px-4 w-max rounded text-white py-1 hover:scale-[1.03]"
+              onClick={clearPayments}
+            >
+              Back
+            </button>
+
           </div>
         )}
       </div>
@@ -168,24 +175,24 @@ const Btc = ({ active, setActive }) => {
   }
 
   return (
-    <div onClick={() => setActive('btc')} className="pb-4 bg-white  transition-all duration-300 ease-linear">
-      <header className="flex p-4 py-6 items-center justify-between cursor-pointer bg-purple-200 bg-opacity-100 border-2 border-purp">
-        <div className="text-black md:text-base text-sm">
+    <div  className="transition-all duration-300 ease-linear">
+      <header className={`flex p-4 py-6 items-center justify-between  bg-purp bg-opacity-100  rounded-sm cursor-pointer transition-all ease-in duration-150  ${ active === 'btc' && 'border-[4px]'}  border-[#1c1b6f] `} onClick={() => setActive('btc')}>
+        <div className="text-white md:text-base text-sm">
           <h3>Pay In Bitcoin</h3>
         </div>
         <div className="flex gap-4">
           <img src={btc} alt="c" className="h-12 w-12" />
         </div>
       </header>
-      {!res && (
-        <section className="pt-5 bg-white text-black px-5">
+      {!res && active === 'btc' && (
+        <section className="pt-5 pb-4 bg-purp bg-opacity-20 text-white px-5 h-[80vh]">
           <p>
             Please note that all payments will now be in BTC to ease payment process for international clients outside
             of the US.
           </p>
 
           <div className="grid gap-2 mt-5 w-[45%]">
-            <label htmlFor="name" className="text-black">
+            <label htmlFor="name" className="text-white">
               Amount
             </label>
             <input
@@ -197,7 +204,7 @@ const Btc = ({ active, setActive }) => {
             />
           </div>
           <button
-            className="bg-purp text-white w-max px-4 mx-auto py-2 rounded-lg mt-10"
+            className="bg-purp text-white w-max px-4 mx-auto py-2 rounded-lg mt-10 shadow-sm"
             onClick={() => handleSubmit(price)}
           >
             Generate wallet ID

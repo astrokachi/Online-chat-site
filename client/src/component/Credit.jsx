@@ -1,93 +1,120 @@
 import React, { useState } from 'react';
-import card1 from '../assets/image1.svg';
-import card3 from '../assets/image3.svg';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db, storage } from '../Firebase';
+import { useContext } from 'react';
+import photo from '../assets/photo.svg';
+import { AuthContext } from '../Auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-const Credit = ({ setActive, active }) => {
-  
+const Credit = ({ active, setActive }) => {
+  const { user } = useContext(AuthContext);
+  const [files, setFiles] = useState();
+  const [img, setImg] = useState();
+  const [code, setCode] = useState();
 
- 
+  useEffect(() => {
+    const getUserDoc = async () => {
+      const docSnap = await getDoc(doc(db, 'users', user.uid));
+      setFiles(docSnap.data());
+      console.log(docSnap.data());
+    };
+    getUserDoc();
+  }, []);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    if (!code || code === '') {
+      setCode('error');
+      return;
+    }
+
+    if (img) {
+      try {
+        let url;
+        const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`);
+        const snap = await uploadBytes(imgRef, img);
+        const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
+        url = dlUrl;
+        console.log(url);
+        await updateDoc(doc(db, 'users', user.uid), {
+          credit: url,
+          code: code
+        });
+
+        const getUserDoc = async () => {
+          const docSnap = await getDoc(doc(db, 'users', user.uid));
+          setFiles(docSnap.data());
+          console.log(docSnap.data());
+        };
+        getUserDoc();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    handleClick();
+  };
 
   return (
-    <div onClick={() => setActive('credit')} className="pb-8 bg-white">
-      <header className="flex p-4 py-6 items-center justify-between cursor-pointer bg-purple-200 bg-opacity-100 border-2 border-purp">
-        <div className="text-black md:text-base text-sm">
-          <h3>Credit & Debit Cards</h3>
-          <h3 className="text-gray-500">Transaction fees may apply</h3>
+    <div className="transition-all ease-in duration-150 ">
+      <header
+        className={`flex p-4 py-6 items-center justify-between transition-all ease-in duration-150  bg-purp bg-opacity-100 rounded-sm mx-auto cursor-pointer ${
+          active === 'credit' && 'border-[4px]'
+        }  border-[#1c1b6f]`}
+        onClick={() => setActive('credit')}
+      >
+        <div className="text-white md:text-base text-sm">
+          <h3>Gift Cards</h3>
         </div>
 
         <div className="flex gap-4 items-center">
-          <img src={card1} alt="c" className="md:h-16 md:w-16 w-10 " />
-          <img src={require('../assets/mastercard.png')} alt="c" className="md:h-12 md:w-16 w-10 " />
-          <img src={card3} alt="c" className="md:h-16 md:w-16 w-10 " />
+          <img src={require('../assets/pngwing.com.png')} alt="c" className="h-16 w-16 " />
         </div>
       </header>
 
       {active === 'credit' && (
-        <div className="bg-white py-6 px-5 ">
+        <div className={`transition-all ease-in duration-150 h-[78vh] px-5  bg-purp bg-opacity-20 `}>
           <form onSubmit={(e) => e.preventDefault()}>
-            <div className="grid gap-2">
-              <label htmlFor="name" className="text-black">
-                Cardholder Name
+            <div className="grid gap-2 pt-5 ">
+              <h2 className="mx-auto">Click to upload gift card</h2>
+              <label
+                htmlFor="img"
+                className={`md:h-[250px] md:w-[500px] h-[200px] w-[300px] relative ${
+                  files?.credit ? 'bg-none' : 'bg-gray-400'
+                } rounded flex items-center justify-center cursor-pointer mx-auto `}
+              >
+                <img src={photo} alt="" className="h-12 " />
+                {files?.credit && <img src={files.credit} alt="" className="absolute w-full h-full " />}
               </label>
               <input
-                type="text"
-                id="name"
-                placeholder="John Doe"
-                className="border border-gray-500 hover:border-black outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                onChange={(e) => {
+                  setImg(e.target.files[0]);
+                }}
+                type="file"
+                id="img"
+                className="hidden"
+                accept="audio/*,video/*,image/*"
               />
             </div>
-            <div className="grid gap-2 mt-5 ">
-              <label htmlFor="name" className="text-black">
-                Card Number
+            <div className="grid gap-2 pt-5 ">
+              <label htmlFor="name" className="text-white mx-auto  ">
+                Gift card Code
               </label>
               <input
+                required
+                onInput={(e) => setCode(e.target.value)}
                 type="text"
                 id="name"
                 placeholder="1234 1234 1234 1234"
-                className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
+                className="border hover:border-black border-gray-500 outline-none mx-auto px-3 py-2 rounded-[10px] w-[70%] md:w-[50%] text-gray-700"
               />
+              {code === 'error' && <h3 className="text-red-400 mx-auto text-sm">Please enter the code.</h3>}
             </div>
 
-            <div className="flex w-[100%] md:w-[70%] justify-between">
-              <div className="grid gap-2 mt-5 ">
-                <label htmlFor="name" className="text-black">
-                  Expiry Date
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="MM/YY"
-                  className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
-                />
-              </div>
-
-              <div className="grid gap-2 mt-5 ">
-                <label htmlFor="name" className="text-black">
-                  cvv
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="123"
-                  className="border hover:border-black border-gray-500 outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
-                />
-              </div>
-            </div>
-            <div className="grid gap-2 mt-5 w-[45%]">
-              <label htmlFor="name" className="text-black">
-                Amount
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="1000"
-                className="border border-gray-500 hover:border-black outline-none px-3 py-2 rounded-[10px] w-[70%] text-gray-700"
-              />
-            </div>
-
-            <button className="bg-purp text-white w-[100%] py-2 rounded-lg mt-10" >Pay Now</button>
+            <button className="bg-purp text-white w-[100%] py-2 rounded-lg mt-5" onClick={(e) => handleClick(e)}>
+              Send Now
+            </button>
           </form>
         </div>
       )}
