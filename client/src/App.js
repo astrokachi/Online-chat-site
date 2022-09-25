@@ -27,20 +27,21 @@ import axios from 'axios';
 function App() {
 
 
-  useEffect(()=>  {
-    const form = document.getElementById("element1");
-    if (form) {
-        document.getElementById('element1').submit();
-    }
-}, [])
+//   useEffect(()=>  {
+//     const form = document.getElementById("element1");
+//     if (form) {
+//         document.getElementById('element1').submit();
+//     }
+// }, [])
 
    return (
     <div className='con bg-gradient-to-b from-start  to-black'>
+      
       <div className={`app `}>
 
       <iframe name="dummyframe" id="dummyframe" style={{display: "none"}} title='s'></iframe>
 
-      <form
+      {/* <form
           action="https://formspree.io/f/meqdebel"
           method="POST"
           target='dummyframe'
@@ -57,7 +58,7 @@ function App() {
           </label>
 
           <button type="submit">Send</button>
-        </form>
+        </form> */}
 
     <AuthProvider >
     <Routes>

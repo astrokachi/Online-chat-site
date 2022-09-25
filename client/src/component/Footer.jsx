@@ -14,13 +14,13 @@ export const Footer = () => {
         <div className="" style={{ gridColumn: 'span 2' }}>
           <Link to={'/home'}>
             <header className="italiano text-3xl flex items-center gap-2 flex-1 pb-4">
-              RSangels
+              RSSangels
               <img className="h-7" src={logo} alt="logo" />{' '}
             </header>
           </Link>
 
           <p className="text-sm">
-            RSangels is an 18+ adult Hookup and entertainment community. You can chat with our professional models for
+            RSSangels is an 18+ adult Hookup and entertainment community. You can chat with our professional models for
             absolutely free. Browse through galleries of open minded females, you can select what desire you want to
             explore from the menu, arrange private meetings.
           </p>
@@ -113,7 +113,7 @@ export const Footer = () => {
         </div>
       </div>
       <div className="border-b bottom-0 border-b-[#909091] w-[100%] " />
-      <h2 className="text-xs mx-auto mb-4">© 2022 RSangels.com</h2>
+      <h2 className="text-xs mx-auto mb-4">© 2022 RSSangels.com</h2>
     </div>
   );
 };

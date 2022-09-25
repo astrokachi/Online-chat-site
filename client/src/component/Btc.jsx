@@ -8,7 +8,7 @@ import btc from '../assets/btc.svg';
 import { AuthContext } from '../Auth';
 import { db } from '../Firebase';
 
-const Btc = ({active, setActive }) => {
+const Btc = ({ active, setActive }) => {
   const { name } = useParams();
   const [price, setPrice] = useState();
   const { res, setRes, user } = useContext(AuthContext);
@@ -128,7 +128,12 @@ const Btc = ({active, setActive }) => {
   if (res) {
     return (
       <div className="text-white bg-purp bg-opacity-20">
-        <header className={`flex p-4 py-6 items-center justify-between cursor-pointer bg-purp bg-opacity-100  rounded-sm cursor ${ active === 'btc' && 'border-[4px]'}  border-[#1c1b6f] `} onClick={() => setActive('btc')}>
+        <header
+          className={`flex p-4 py-6 items-center justify-between cursor-pointer bg-purp bg-opacity-100  rounded-sm cursor ${
+            active === 'btc' && 'border-[4px]'
+          }  border-[#1c1b6f] `}
+          onClick={() => setActive('btc')}
+        >
           <div className="text-white md:text-base text-sm">
             <h3>Pay In Bitcoin</h3>
           </div>
@@ -167,7 +172,6 @@ const Btc = ({active, setActive }) => {
             >
               Back
             </button>
-
           </div>
         )}
       </div>
@@ -175,8 +179,13 @@ const Btc = ({active, setActive }) => {
   }
 
   return (
-    <div  className="transition-all duration-300 ease-linear">
-      <header className={`flex p-4 py-6 items-center justify-between  bg-purp bg-opacity-100  rounded-sm cursor-pointer transition-all ease-in duration-150  ${ active === 'btc' && 'border-[4px]'}  border-[#1c1b6f] `} onClick={() => setActive('btc')}>
+    <div className="transition-all duration-300 ease-linear">
+      <header
+        className={`flex p-4 py-6 items-center justify-between  bg-purp bg-opacity-100  rounded-sm cursor-pointer transition-all ease-in duration-150  ${
+          active === 'btc' && 'border-[4px]'
+        }  border-[#1c1b6f] `}
+        onClick={() => setActive('btc')}
+      >
         <div className="text-white md:text-base text-sm">
           <h3>Pay In Bitcoin</h3>
         </div>

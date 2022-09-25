@@ -38,7 +38,7 @@ const Policy = () => {
             records:
           </p>
           <br />
-          <p>Database Administrator - help@rsangels.com</p>
+          <p>Database Administrator - Incorporateteam@outlook.com</p>
         </div>
       </section>
       <Footer />

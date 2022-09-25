@@ -24,7 +24,7 @@ export const Nav = () => {
     setQuery(value);
     if (models && value?.length > 0) {
       let newM = [...holder];
-      newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
+      newM = newM.filter((user) => user?.name.toLowerCase()?.includes(value.toLowerCase()));
       setModels(newM);
       // console.log(models);
     }
@@ -38,8 +38,8 @@ export const Nav = () => {
   useEffect(() => {
     const sortUsers = () => {
       if (!user?.email.includes('-model')) {
-        setModels(users.filter((ouser) => ouser.email.includes('-model')));
-        setHolder(users.filter((ouser) => ouser.email.includes('-model')));
+        setModels(users.filter((ouser) => ouser?.email?.includes('-model')));
+        setHolder(users.filter((ouser) => ouser?.email?.includes('-model')));
       }
     };
     sortUsers();
@@ -58,7 +58,7 @@ export const Nav = () => {
         <div className="flex w-full md:justify-between justify-center gap-5">
           <Link to={'/home'}>
             <header className="italiano text-3xl flex items-center gap-2 flex-1 ">
-              RSangels
+              RSSangels
               <img className="h-7" src={logo} alt="logo" />{' '}
             </header>
           </Link>
@@ -98,11 +98,9 @@ export const Nav = () => {
               </svg>
             </Link>
             {user ? (
-              <Link to="/login">
-                <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
-                  Sign out
-                </h2>
-              </Link>
+              <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
+                Sign out
+              </h2>
             ) : (
               <div className="gap-3 text-xs items-center flex ">
                 <Link to="/login">
@@ -125,7 +123,7 @@ export const Nav = () => {
             aria-modal="true"
             role="dialog"
           >
-            <main className="scrolls  overflow-y-scroll h-[72vh]">
+            <main className="scrolls  overflow-y-scroll h-[80vh] ">
               <section className="grid py-2 gap-2 relative transition-all ease-in duration-150 ">
                 <Link to="/home" onClick={() => setIsToggle(true)}>
                   <div className="flex w-full items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm">
@@ -313,49 +311,49 @@ export const Nav = () => {
                     <h2>fat ass</h2>
                   </div>
                 </Link>
-              </section>
-            </main>
 
-            {user ? (
-              <h2
-                className="text-center fixed bottom-24 mx-auto w-[90%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm "
-                onClick={logout}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <h2>Sign Out</h2>
-              </h2>
-            ) : (
-              <div className="flex w-[90%] justify-between fixed bottom-24 px-4">
-                <Link to="/login">
-                  <h2 className="text-center  mx-auto w-[100%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">
+                {user ? (
+                  <h2
+                    className="text-center mx-auto w-[100%] mt-4 long cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm "
+                    onClick={logout}
+                  >
+                    <h2>Sign Out</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                       <path
                         fill-rule="evenodd"
-                        d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z"
+                        d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z"
                         clip-rule="evenodd"
                       />
                     </svg>
-
-                    <h2 className="w-max">Log in</h2>
                   </h2>
-                </Link>
-                <Link to={'/login'}>
-                  <h2 className="text-center mx-auto w-[100%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3">
-                      <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
-                    </svg>
+                ) : (
+                  <div className="flex w-[100%] gap-5 mt-4">
+                    <Link to="/login">
+                      <h2 className="text-center  mx-auto w-[100%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm ">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4">
+                          <path
+                            fill-rule="evenodd"
+                            d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
 
-                    <h2 className="w-max">Sign up</h2>
-                  </h2>
-                </Link>
-              </div>
-            )}
+                        <h2 className="w-max">Log in</h2>
+                      </h2>
+                    </Link>
+                    <Link to={'/login'}>
+                      <h2 className="text-center mx-auto w-[100%] cursor-pointer flex items-center gap-3 hover:bg-purp hover:bg-opacity-30 px-2 py-1 rounded-[5px] text-sm ">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3">
+                          <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                        </svg>
+
+                        <h2 className="w-max">Sign up</h2>
+                      </h2>
+                    </Link>
+                  </div>
+                )}
+              </section>
+            </main>
           </div>
         </div>
       </nav>

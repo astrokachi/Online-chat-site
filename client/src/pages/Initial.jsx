@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.svg';
+import Chatra from '@chatra/chatra'
+import { useEffect } from 'react';
 
 export const Initial = () => {
+  useEffect(() => {
+    Chatra('hide')
+  }, [])
+  
   return (
     <div className="bg-gradient-to-b  from-start text-center to-black  relative flex font-normal items-center flex-col text-white px-3 py-9">
       <header className="italiano text-3xl mb-10 flex items-center gap-2">
-        RSangels <img className="h-7" src={logo} alt="logo" />{' '}
+        RSSangels <img className="h-7" src={logo} alt="logo" />{' '}
       </header>
 
       <p className="text-sm  font-normal max-w-[706px]">

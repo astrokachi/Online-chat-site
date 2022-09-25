@@ -13,7 +13,7 @@ const Privacy = () => {
           <i className="block pb-24">Last modified: April 8, 2020</i>
           <p>
             Technius Ltd is the publisher and operator (referred to as the “Company”, “we”, “our” or “us”) of the
-            Stripchat website, namely Stripchat.com (referred to as the “Website”).
+            RSSangels website, namely RSSangels.com (referred to as the “Website”).
           </p>
           <br />
 
@@ -113,7 +113,7 @@ const Privacy = () => {
             <p>
               If you have any questions, comments and/or requests regarding this privacy policy or wish to obtain more
               details in relation to the personal data we process about you, please contact us by sending an email to
-              help@RSangels.com.
+             Incorporateteam@outlook.com.
             </p>
           </section>
           <br />
@@ -316,9 +316,9 @@ const Privacy = () => {
               you voluntarily submit and or post, so we encourage you to exercise discretion and caution with respect to
               your personal information. Once you have submitted and or posted information, you may not be able to edit
               or delete such information. To request removal of your personal information which you have posted or
-              submitted in the manner stated above, send us an e-mail at help@stripchat.com. In some cases, we may not
-              be able to remove your personal information, in which case we will let you know if we are unable to do so
-              and why.
+              submitted in the manner stated above, send us an e-mail at Incorporateteam@outlook.com. In some cases, we
+              may not be able to remove your personal information, in which case we will let you know if we are unable
+              to do so and why.
             </p>
           </section>
           <br />
@@ -397,8 +397,9 @@ const Privacy = () => {
               Our Website is not directed to individuals under the age of eighteen (18) or the applicable age of
               majority in the jurisdiction from which the Website is accessed and we do not knowingly collect personal
               data from minors. If you become aware that your child has provided us with personal data, please contact
-              us electronically at help@stripchat.com. If we become aware that a minor has provided us with personal
-              data, we will take steps to remove such information and terminate that person’s account immediately.
+              us electronically at Incorporateteam@outlook.com. If we become aware that a minor has provided us with
+              personal data, we will take steps to remove such information and terminate that person’s account
+              immediately.
             </p>
           </section>
           <br />

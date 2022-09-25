@@ -22,24 +22,24 @@ const Chats = () => {
 
   useEffect(() => {
     getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
-      if (docSnap.exists) {
+      if (docSnap.exists()) {
         setUser(docSnap.data());
       }
     });
   }, []);
 
   const searchFn = (value) => {
-    console.log(value);
+    // console.log(value);
     if (models && value.length > 0) {
       let newM = [...holder];
       newM = newM.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
       setModels(newM);
     }
     if (commons && value.length > 0) {
-      console.log('reached');
+      // console.log('reached');
       let newC = [...holder];
       newC = newC.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
-      console.log(newC);
+      // console.log(newC);
       setCommons(newC);
     }
 
@@ -49,13 +49,11 @@ const Chats = () => {
     }
   };
 
-  console.log(isToggle);
-
   useEffect(() => {
     const sortUsers = () => {
       if (!user?.email.includes('-model')) {
-        setModels(users.filter((ouser) => ouser.email.includes('-model')));
-        setHolder(users.filter((ouser) => ouser.email.includes('-model')));
+        setModels(users.filter((ouser) => ouser.email.includes('-model') && ouser.texted));
+        setHolder(users.filter((ouser) => ouser.email.includes('-model') && ouser.texted));
       } else if (user?.email.includes('-model')) {
         setCommons(users.filter((ouser) => !ouser.email.includes('-model')));
         setHolder(users.filter((ouser) => !ouser.email.includes('-model')));

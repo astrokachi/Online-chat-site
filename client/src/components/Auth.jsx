@@ -12,6 +12,7 @@ import { auth } from '../Firebase';
 import { setDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import pic from '../assets/pic.png';
+import Chatra from '@chatra/chatra';
 
 const initialState = {
   name: '',
@@ -45,6 +46,10 @@ export const Auth = () => {
   useEffect(() => {
     console.log(form);
   }, [form]);
+
+  useEffect(() => {
+    Chatra('hide');
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -107,7 +112,7 @@ export const Auth = () => {
       setPassword(true);
     } catch (error) {
       console.log(error);
-      setForm({ ...form, error: 'msg: Please enter an email'})
+      setForm({ ...form, error: 'msg: Please enter an email' });
     }
   }
 
@@ -121,7 +126,7 @@ export const Auth = () => {
             }`}
           >
             <div>
-              <header className="italiano text-purp text-5xl mb-12">RSangels</header>
+              <header className="italiano text-purp text-5xl mb-12">RSSangels</header>
               <h1 className="text-2xl font-medium pb-2">Log in.</h1>
               <p className="font-medium text-sm pb-7">
                 Log in with your details that you used during the sign up process
@@ -166,7 +171,7 @@ export const Auth = () => {
 
           <div className={`py-10 px-14 h-max div w-full absolute top-0  ${password ? 'block' : 'hidden'}`}>
             <div className="">
-              <header className="italiano text-purp text-5xl ">RSangels</header>
+              <header className="italiano text-purp text-5xl ">RSSangels</header>
             </div>
 
             <p className="text-black text-sm mt-32">
@@ -180,7 +185,7 @@ export const Auth = () => {
             }`}
           >
             <div className="">
-              <header className="italiano text-purp text-5xl mb-12">RSangels</header>
+              <header className="italiano text-purp text-5xl mb-12">RSSangels</header>
               <h1 className="text-2xl font-medium pb-2">Sign up.</h1>
               <p className="font-medium text-sm pb-7">Enter with your details to sign up.</p>
               <form

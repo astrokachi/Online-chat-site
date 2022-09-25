@@ -6,10 +6,20 @@ import { Footer } from '../component/Footer';
 import { Nav } from '../component/Nav';
 import { AuthContext } from '../Auth';
 import { Link, useParams } from 'react-router-dom';
-import { createRef } from 'react';
-// import { db, auth } from '../firebase';
-// import { collection, query, where, onSnapshot } from 'firebase/firestore';
-// import { useEffect } from 'react';
+import Chatra from '@chatra/chatra';
+
+let config = {
+  integration: {
+    name: 'RS bot',
+    email: 'astrokachi@gmail.com',
+  },
+  ID: 'yXhm9kiPWX5GoZwLP',
+};
+
+Chatra('init', config);
+// Chatra('pageView')
+
+Chatra('setZIndex', 1);
 
 export const HomePage = () => {
   let { users } = useContext(AuthContext);
@@ -23,8 +33,12 @@ export const HomePage = () => {
   pref = pref?.toLowerCase();
 
   useEffect(() => {
+    Chatra('show');
+  }, []);
+
+  useEffect(() => {
     let place = [...models];
-    place = users.filter((model) => model?.email.includes('-model'));
+    place = users.filter((model) => model?.email?.includes('-model'));
     setModels(place);
   }, [users]);
 

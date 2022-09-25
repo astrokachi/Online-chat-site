@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chatra/chatra": "^1.0.3",
+    "@emailjs/browser": "^3.7.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "emailjs-com": "^3.2.0",
     "firebase": "^9.9.4",
     "list-react-files": "^0.2.0",
     "moment": "^2.29.4",

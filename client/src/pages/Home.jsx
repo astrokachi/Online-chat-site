@@ -11,7 +11,7 @@ export const Home = () => {
     <div className="bg-gradient-to-b  overflow-x-hidden min-h-screen relative max-w-[100vw] w-[100vw] text-white from-start text-center to-black ">
       {/* <Nav /> */}
       <header className="italiano text-3xl flex items-center gap-2 flex-1 justify-center p-4 mt-4">
-        RSangels <img className="h-7" src={logo} alt="logo" />{' '}
+        RSSangels <img className="h-7" src={logo} alt="logo" />{' '}
       </header>
 
       <div className="flex md:flex-row flex-col w-full">

@@ -29,7 +29,6 @@ export const Chat = () => {
   const inte = otherUser[0]?.about?.split('...')[8];
   const rules = otherUser[0]?.about?.split('...')[9];
 
-  console.log(otherUser[0]);
 
   return (
     <div className="grid md:grid-cols-5 h-screen overflow-hidden relative bg-gradient-to-b from-start  to-black">
