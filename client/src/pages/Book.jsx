@@ -8,12 +8,15 @@ export const Book = () => {
   const [active, setActive] = useState('credit');
 
   useEffect(() => {
-    console.log(active)
-  }, [active])
+    console.log(active);
+  }, [active]);
   return (
-    <div className="min-h-screen text-white transition-all ease duration-150">
-      <Credit active={active} setActive={setActive} />
-      <Btc active={active} setActive={setActive} />
-    </div>
+    <>
+      <Nav />
+      <div className="min-h-screen text-white transition-all ease duration-150 md:pt-16 sm:pt-32">
+        <Credit active={active} setActive={setActive} />
+        <Btc active={active} setActive={setActive} />
+      </div>
+    </>
   );
 };

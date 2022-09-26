@@ -24,9 +24,8 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
   const [text, setText] = useState('');
   const { user } = useContext(AuthContext);
   const [img, setImg] = useState();
-  const [coords, setCoords] = useState({});
-
-  // console.log(user, otherUser)
+  const [coords, setCoords] = useState({ latitude: 0, longitude: 0 });
+  const [address, setAddress] = useState('');
 
   useEffect(() => {
     const handleClick = async () => {
@@ -90,18 +89,49 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
   useEffect(() => {
     const getLocationData = () => {
       navigator.geolocation.getCurrentPosition((res) => {
-        console.log(res);
-        console.log(res.coords.latitude, res.coords.longitude);
+        // console.log(res);
+        // console.log(res.coords.latitude, res.coords.longitude);
       });
     };
     getLocationData();
   }, []);
 
+  useEffect(() => {
+    const getLocationData = () => {
+      navigator.geolocation.getCurrentPosition((res) => {
+        // console.log(res);
+        // console.log(res.coords.latitude, res.coords.longitude);
+        setCoords({ latitude: res.coords.latitude, longitude: res.coords.longitude });
+      });
+    };
+    getLocationData();
+  }, []);
+
+  useEffect(() => {
+    if (coords.latitude > 0) {
+      var requestOptions = {
+        method: 'GET',
+      };
+
+      fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${coords.latitude}&lon=${coords.longitude}&apiKey=f8a62009be794a4f93f82d04f47f451a`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result.features[0].properties.formatted);
+          setAddress(result.features[0].properties.formatted);
+        })
+        .catch((error) => console.log('error', error));
+    }
+  }, [coords.latitude, coords.longitude]);
+
   const sendLocation = async () => {
     const id = user.uid > otherUser.uid ? `${user.uid} + ${otherUser.uid}` : `${otherUser.uid} + ${user.uid}`;
 
     await addDoc(collection(db, 'messages', id, 'chat'), {
-      location: true,
+      location: address,
+      coords: { lat: coords.latitude, lon: coords.longitude },
       from: user.uid,
       to: otherUser.uid,
       createdAt: Timestamp.fromDate(new Date()),
@@ -123,7 +153,7 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
         accept="audio/*,video/*,image/*"
         className="hidden"
       />
-      <div className="cursor-pointer ml-1">
+      <div className="cursor-pointer ml-1 " onClick={sendLocation}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

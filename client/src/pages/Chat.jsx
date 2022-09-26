@@ -7,6 +7,7 @@ import { AuthContext } from '../Auth';
 
 import Message from '../component/Message';
 import back from '../assets/back.svg';
+import { MapComponent } from '../component/Map';
 
 export const Chat = () => {
   const { id } = useParams();
@@ -28,7 +29,6 @@ export const Chat = () => {
   const age = otherUser[0]?.about?.split('...')[7];
   const inte = otherUser[0]?.about?.split('...')[8];
   const rules = otherUser[0]?.about?.split('...')[9];
-
 
   return (
     <div className="grid md:grid-cols-5 h-screen overflow-hidden relative bg-gradient-to-b from-start  to-black">
@@ -106,9 +106,22 @@ export const Chat = () => {
       </div>
       {image && (
         <div
-          className={`absolute flex justify-center items-center w-[100vw] h-[100vh] z-50 cursor-zoom-out bg-slate-800 bg-opacity-70`}
+          className={`absolute flex justify-center items-center w-[100vw] h-[100vh] z-[150] cursor-zoom-out bg-slate-800 bg-opacity-70`}
           onClick={() => setImage(false)}
         >
+          <div className='absolute top-2 md:right-20 right-5 bg-black p-2 rounded cursor-pointer'>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="white"
+              class="w-6 h-6"
+              
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
           <img
             src={
               otherUser[0]?.email.includes('-model')
@@ -124,7 +137,7 @@ export const Chat = () => {
         className=" text-white overflow-y-scroll h-[89vh] scrolls text-center bg-gradient-to-b from-start  to-black"
         style={{ gridColumn: 'span 3' }}
       >
-        <header className="bg-purp bg-opacity-100 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center">
+        <header className="bg-purp bg-opacity-100 p-4 flex gap-4 fixed w-[100%] md:w-[60%] items-center z-[100]">
           <Link to="/chats">
             <img src={back} alt="" className="h-6 w-6 cursor-pointer" />
           </Link>
