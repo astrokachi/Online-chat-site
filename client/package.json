@@ -25,7 +25,8 @@
     "stream-chat": "^6.8.0",
     "stream-chat-react": "^9.4.1",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

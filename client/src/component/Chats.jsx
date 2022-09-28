@@ -52,8 +52,20 @@ const Chats = () => {
   useEffect(() => {
     const sortUsers = () => {
       if (!user?.email.includes('-model')) {
-        setModels(users.filter((ouser) => ouser.email.includes('-model') && ouser.texted));
-        setHolder(users.filter((ouser) => ouser.email.includes('-model') && ouser.texted));
+        setModels(
+          users.filter(
+            (ouser) =>
+              ouser.email.includes('-model') &&
+              ouser[`texted${user?.uid > ouser?.uid ? `${user?.uid} + ${ouser?.uid}` : `${ouser?.uid} + ${user?.uid}`}`]
+          )
+        );
+        setHolder(
+          users.filter(
+            (ouser) =>
+              ouser.email.includes('-model') &&
+              ouser[`texted${user?.uid > ouser?.uid ? `${user?.uid} + ${ouser?.uid}` : `${ouser?.uid} + ${user?.uid}`}`]
+          )
+        );
       } else if (user?.email.includes('-model')) {
         setCommons(users.filter((ouser) => !ouser.email.includes('-model')));
         setHolder(users.filter((ouser) => !ouser.email.includes('-model')));
@@ -105,7 +117,7 @@ const Chats = () => {
           <div className="pt-8">
             {user?.email.includes('-model')
               ? commons.map((c, index) => <User c={c} key={index} />)
-              : models.map((m, index) => <User m={m} key={index} />)}
+              : models.length > 0 ? models.map((m, index) => <User m={m} key={index} />) : <h4>Your chats with models will appear here. You currently have no chats.</h4>}
           </div>
         </div>
       </div>

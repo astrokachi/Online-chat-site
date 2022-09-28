@@ -98,7 +98,7 @@ export const Nav = () => {
               </svg>
             </Link>
             {user ? (
-              <h2 className="bg-purp px-3 py-1 rounded-[20px]" onClick={logout}>
+              <h2 className="bg-purp px-3 py-1 rounded-[20px] cursor-pointer" onClick={logout}>
                 Sign out
               </h2>
             ) : (

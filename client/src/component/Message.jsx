@@ -104,13 +104,46 @@ const Message = ({ msg, otherUser }) => {
               )}
             </a>
           ) : null}
-          <p
-            className={`bg-purp text-right px-9 text-sm py-1 rounded-full ml-auto text-white w-max pb-1 ${
-              msg.text === '' && 'hidden'
-            }`}
-          >
-            {msg.text}
-          </p>
+          {!msg.location && (
+            <p
+              className={`bg-purp text-right px-9 text-sm py-1 rounded-full ml-auto text-white w-max pb-1 ${
+                msg.text === '' && 'hidden'
+              }`}
+            >
+              {msg.text}
+            </p>
+          )}
+          {msg.location && (
+            <a
+              href={`https://www.google.com/maps/place//@${msg.coords.lat},${msg.coords.lon},17z?hl=en`}
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              <p
+                className={`border border-white  text-right px-9 text-sm py-1 rounded-md ml-auto text-white w-max pb-1 flex gap-2 items-center`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-4 h-5"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                  />
+                </svg>
+                <h3>{msg.location}</h3>
+              </p>
+              <div className="h-[200px] w-[60%] overflow-hidden pt-4 float-right">
+                <MapComponent lat={msg.coords.lat} lon={msg.coords.lon} />
+              </div>
+            </a>
+          )}
           {/* <br /> */}
           <div className="text-right text-xs w-max ml-auto mb-2 mr-4">
             <small>{msg.media || msg.text !== '' ? <Moment fromNow>{msg.createdAt.toDate()}</Moment> : null}</small>

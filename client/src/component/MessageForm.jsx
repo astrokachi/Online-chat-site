@@ -49,40 +49,46 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
   }, [otherUser?.uid, user?.uid]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (user?.uid) {
+      e.preventDefault();
 
-    const id = user.uid > otherUser.uid ? `${user.uid} + ${otherUser.uid}` : `${otherUser.uid} + ${user.uid}`;
+      const id = user.uid > otherUser.uid ? `${user.uid} + ${otherUser.uid}` : `${otherUser.uid} + ${user.uid}`;
 
-    try {
-      let url;
-      if (img) {
-        const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`);
-        const snap = await uploadBytes(imgRef, img);
-        const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
-        url = dlUrl;
+      try {
+        let url;
+        if (img) {
+          const imgRef = ref(storage, `images/${new Date().getTime()} - ${img.name}`);
+          const snap = await uploadBytes(imgRef, img);
+          const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
+          url = dlUrl;
+        }
+        await addDoc(collection(db, 'messages', id, 'chat'), {
+          text: text,
+          from: user.uid,
+          to: otherUser.uid,
+          createdAt: Timestamp.fromDate(new Date()),
+          media: url || '',
+        });
+
+        setText('');
+
+        await setDoc(doc(db, 'lastMsg', id), {
+          text: text,
+          from: user.uid,
+          to: otherUser.uid,
+          createdAt: Timestamp.fromDate(new Date()),
+          media: url || '',
+          unread: true,
+        });
+
+        await updateDoc(doc(db, 'users', otherUser.uid), { [`texted${id}`]: true });
+        await updateDoc(doc(db, 'users', user.uid), { [`texted${id}`]: true });
+
+        // console.log(docss.data())
+        console.log('reached');
+      } catch (error) {
+        console.log(error);
       }
-      await addDoc(collection(db, 'messages', id, 'chat'), {
-        text: text,
-        from: user.uid,
-        to: otherUser.uid,
-        createdAt: Timestamp.fromDate(new Date()),
-        media: url || '',
-      });
-
-      setText('');
-
-      await setDoc(doc(db, 'lastMsg', id), {
-        text: text,
-        from: user.uid,
-        to: otherUser.uid,
-        createdAt: Timestamp.fromDate(new Date()),
-        media: url || '',
-        unread: true,
-      });
-
-      await updateDoc(doc(db, 'users', otherUser.uid), { texted: true });
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -136,6 +142,17 @@ export const MessageForm = ({ otherUser, setMsgs }) => {
       to: otherUser.uid,
       createdAt: Timestamp.fromDate(new Date()),
     });
+
+    await setDoc(doc(db, 'lastMsg', id), {
+      text: 'Location tag 📍',
+      from: user.uid,
+      to: otherUser.uid,
+      createdAt: Timestamp.fromDate(new Date()),
+      unread: true,
+    });
+    
+    await updateDoc(doc(db, 'users', otherUser.uid), { [`texted${id}`]: true });
+    await updateDoc(doc(db, 'users', user.uid), { [`texted${id}`]: true });
   };
 
   return (
